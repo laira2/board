@@ -9,10 +9,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-onMounted(() => {
-});
+
+const boards = async() =>{
+    const response = await axios.get("http://127.0.0.1:8000/api/board")
+}
 
 const products = ref();
 const columns = [
