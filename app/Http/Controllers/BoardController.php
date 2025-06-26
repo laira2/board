@@ -29,7 +29,7 @@ class BoardController extends Controller
 
     }
     public function postpage(){
-        return Inertia::render('Board/Partials/BoardForm');
+        return Inertia::render('Layouts/BoardLayout');
     }
 
     public function store(Request $request)
