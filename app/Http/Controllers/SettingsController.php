@@ -10,4 +10,8 @@ class SettingsController extends Controller
     public static function index() {
         return Inertia::render('Settings/Index');
     }
+    
+    public static function store() {
+        // return Inertia::render('Settings/Index');
+    }
 }
