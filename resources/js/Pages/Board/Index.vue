@@ -1,5 +1,5 @@
-<template>
-    <div class="card">
+<template >
+    <div class="card items-center">
         <DataTable :value="boards" tableStyle="min-width: 50rem">
             <Column v-for="board of columns" :key="board.field" :field="board.field" :header="board.header"></Column>
         </DataTable>
@@ -11,9 +11,14 @@ import { ref, onMounted } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
-const boards = defineProps(['data']);
+const boards = defineProps({
+    data: {
+        type: Array,
+        required:true
+    }
+});
 
-console.log('boards data: ', boards);
+console.log('boards data: ', boards);   
 
 const columns = [
     { field: 'id', header: 'ID' },

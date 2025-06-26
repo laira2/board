@@ -40,7 +40,8 @@ class BoardController extends Controller
             'content' => $request['content'],
         ]);
         new BoardResource($board);
+        Log::alert("store실행됨");
 
-        return Inertia::render('Board/Index');
+        return to_route('board.index');
     }
 }
