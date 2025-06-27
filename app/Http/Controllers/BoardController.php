@@ -10,17 +10,16 @@ use Inertia\Inertia;
 
 class BoardController extends Controller
 {
-    public static function index()
+    public function index()
     {
         $boards = Board::where('isDeleted', false)
             ->orderBy('created_at', 'desc')
             ->get();
         
         Log::debug($boards);
-        $data = response()->json($boards);
 
         return Inertia::render('Board/Index', [
-                'data' => $data,
+                'boards' => $boards,
             ]);
     }      
   
@@ -42,6 +41,6 @@ class BoardController extends Controller
         new BoardResource($board);
         Log::alert("store실행됨");
 
-        return to_route('board.index');
+        return Inertia::location(route('board.index'));
     }
 }

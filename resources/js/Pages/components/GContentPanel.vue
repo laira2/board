@@ -1,9 +1,8 @@
 <template>
     <Panel class="p-panel-content-container m-0 p-0">
-        <Index />
+        <slot>
+        </slot>
     </Panel>
 </template>
 <script setup>
-import Index from '../Board/Index.vue';
-
 </script>

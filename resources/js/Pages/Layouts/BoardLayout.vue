@@ -3,8 +3,9 @@
         <Panel legend="BOARD"  header="BOARD" toggleable >
             <TopMenu />
         </Panel> 
-        
-        <GContentPanel/>
+        <slot>
+            <!-- content 영역 -->
+        </slot>
         <Footer />
     </div>
 </template>
