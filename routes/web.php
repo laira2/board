@@ -9,3 +9,4 @@ Route::get('/', [BoardController::class, 'index']);
 
 Route::get('/settings', [SettingsController::class, 'index']);
 
+Route::get('/layout', [BoardController::class, 'postpage']);
