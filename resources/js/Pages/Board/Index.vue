@@ -5,9 +5,16 @@
                 <DataTable :value="boards" tableStyle="min-width: 50rem">
                     <Column v-for="board of columns" :key="board.field" :field="board.field" :header="board.header">
                         <template #body="slotProps">
-                            <a v-if="board.field === 'title'" :href="`/boards/${slotProps.data.id}`" class="text-blue-600 hover:underline">
+                            <Link
+                                v-if="board.field === 'title'"
+                                :href="`/api/board/${slotProps.data.id}`"
+                                class="text-blue-600 hover:underline"
+                            >
                                 {{ slotProps.data[board.field] }}
-                            </a>
+                            </Link>
+                            <!-- <a v-if="board.field === 'title'" :href="`/board/${slotProps.data.id}`" class="text-blue-600 hover:underline">
+                                {{ slotProps.data[board.field] }}
+                            </a> -->
                             <span v-else>
                                 {{ slotProps.data[board.field] }}
                             </span>
@@ -21,6 +28,7 @@
 
 <script setup>
 import DataTable from 'primevue/datatable';
+import { Link } from '@inertiajs/vue3'
 import Column from 'primevue/column';
 import BoardLayout from '../Layouts/BoardLayout.vue';
 import GContentPanel from '../components/GContentPanel.vue';
