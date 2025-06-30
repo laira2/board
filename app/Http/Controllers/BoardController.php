@@ -4,44 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BoardResource;
 use App\Models\Board;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class BoardController extends Controller
 {
-    public static function index()
+    public function index()
     {
         $boards = Board::where('isDeleted', false)
             ->orderBy('created_at', 'desc')
             ->get();
         
-        Log::debug($boards);
-        $data = response()->json($boards);
+        Log::debug('index 들어옴'.$boards);
+
+        Log::debug();
 
         return Inertia::render('Board/Index', [
-                'data' => $data,
+                'boards' => $boards,
             ]);
     }      
-  
-
-    public static function getAllBoards() {
-
-    }
-    public function postpage(){
-        return Inertia::render('Layouts/BoardLayout');
+    public function create()
+    {
+        return Inertia::render('Board/BoardCreate');
     }
 
     public function store(Request $request)
     {
-        $board = Board::create([
-            'title' => $request['title'],
-            'author' => $request['author'],
-            'content' => $request['content'],
-        ]);
-        new BoardResource($board);
-        Log::alert("store실행됨");
+        try{
+               $board = Board::create([
+                    'title' => $request['title'],
+                    'author' => $request['author'],
+                    'content' => $request['content'],
+                ]);
+                new BoardResource($board);
+                Log::alert("store실행됨");
 
-        return to_route('board.index');
+                return redirect()->to('home.index');
+                // return response([
+                //     'success'=> true
+                // ]);
+        }catch(Exception $e){
+            $e -> getMessage();
+        }
+        
+    }
+
+    public function show($id)
+    {
+        $board = Board::where('isDeleted',false)
+                        ->whereId($id)
+                        ->first();
+        if (!$board)
+        {
+            return response() -> json(['error'=>'There no post',404]);
+        }
+
+        return Inertia::render('Board/BoardContent',[
+            'board' => $board
+        ]);
     }
 }

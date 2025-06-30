@@ -31,8 +31,8 @@ const items = ref([
         url: '/',
     },
     {
-        label: 'User',
-        url: '/',
+        label: 'Post',
+        url: '/board/post',
     },
     {
         label: 'Settings',

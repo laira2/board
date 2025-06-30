@@ -1,25 +1,43 @@
 <template >
-    <div class="card items-center">
-        <DataTable :value="boards" tableStyle="min-width: 50rem">
-            <Column v-for="board of columns" :key="board.field" :field="board.field" :header="board.header"></Column>
-        </DataTable>
-    </div>
+    <BoardLayout>
+        <GContentPanel>
+            <div class="card items-center">
+                <DataTable :value="boards" tableStyle="min-width: 50rem">
+                    <Column v-for="board of columns" :key="board.field" :field="board.field" :header="board.header">
+                        <template #body="slotProps">
+                            <Link
+                                v-if="board.field === 'title'"
+                                :href="`/api/board/${slotProps.data.id}`"
+                                class="text-blue-600 hover:underline"
+                            >
+                                {{ slotProps.data[board.field] }}
+                            </Link>
+                            <!-- <a v-if="board.field === 'title'" :href="`/board/${slotProps.data.id}`" class="text-blue-600 hover:underline">
+                                {{ slotProps.data[board.field] }}
+                            </a> -->
+                            <span v-else>
+                                {{ slotProps.data[board.field] }}
+                            </span>
+                        </template>
+                    </Column>
+                </DataTable>
+            </div>  
+        </GContentPanel>
+    </BoardLayout>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import DataTable from 'primevue/datatable';
+import { Link } from '@inertiajs/vue3'
 import Column from 'primevue/column';
+import BoardLayout from '../Layouts/BoardLayout.vue';
+import GContentPanel from '../components/GContentPanel.vue';
 
-const boards = defineProps({
-    data: {
-        type: Array,
-        required:true
+const props = defineProps({
+    boards: {
+        type: Array
     }
 });
-
-console.log('boards data: ', boards);   
-
 const columns = [
     { field: 'id', header: 'ID' },
     { field: 'title', header: '제목' },

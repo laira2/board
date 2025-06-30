@@ -23,6 +23,7 @@
         "@primevue/themes": "^4.3.5",
         "@vitejs/plugin-vue": "^5.2.4",
         "primeicons": "^7.0.0",
-        "primevue": "^4.3.5"
+        "primevue": "^4.3.5",
+        "quill": "^2.0.3"
     }
 }
