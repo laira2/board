@@ -1,17 +1,12 @@
 <template>
     <Card style="overflow: hidden">
         <template #header>
-            <h3>
-                {{ board.title }}
-            </h3>
+        <h3>{{ board.title }}</h3>  
         </template>
-        <template #title>Advanced Card</template>
-        <template #subtitle>Card subtitle</template>
+        <template #title>게시글 상세</template> 
+        <template #subtitle>작성자: {{ board.author }}</template>
         <template #content>
-            <p class="m-0">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-                quas!
-            </p>
+            <p class="m-0">{{ board.content }}</p>  
         </template>
         <template #footer>
             <div class="flex gap-4 mt-1">
@@ -23,5 +18,9 @@
 </template>
 
 <script setup>
+
+const props = defineProps({
+  board: Object,
+})
 
 </script>
