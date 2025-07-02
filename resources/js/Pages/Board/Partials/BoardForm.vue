@@ -39,27 +39,34 @@
 import { reactive, toRaw } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Textarea from 'primevue/textarea';
+import { useForm } from '@inertiajs/vue3'
 // import Toast from 'primevue/toast';
 
 // const toast = useToast();
 
-const form = reactive({
+const form = useForm({
     title: '',
     author: '',
-    content: '',
+    content: ''
 });
-
-const onFormSubmit = async() => {
-    try{
-        const response = await axios.post('/api/board', toRaw(form));
+const onFormSubmit = () => {
+    form.post('/board/post', {
+        onSuccess: () => {
+            // 성공 시 자동 리다이렉트
+        }
+    });
+}
+// const onFormSubmit = async() => {
+//     try{
+        // const response = await axios.post('/board/post', toRaw(form));
         // console.log('submitted:', response.data);
 
         // if(response.data.success){
         //     window.location.href = '/';
         // }
-    }catch(error){
-        console.log('submit fail',error);
-    }
+//     }catch(error){
+//         console.log('submit fail',error);
+//     }
     
-};
+// };
 </script>

@@ -8,14 +8,14 @@ const props = defineProps({
         type: Array
     }
 });
-console.log("boardContent board:",props);
+console.log("boardContent board:", props);
 
 </script>
 
 <template>
     <BoardLayout>
         <GContentPanel>
-            <BoardDetail />
+            <BoardDetail :board="board" />
         </GContentPanel>
     </BoardLayout>
 </template>

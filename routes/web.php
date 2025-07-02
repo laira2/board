@@ -8,7 +8,9 @@ Route::get('/', [BoardController::class, 'index'])->name('home.index');
 
 Route::get('/board/post', [BoardController::class, 'create']);
 
-Route::get('/board/{id}', [BoardController::class, 'show']);
+Route::post('/board/post', [BoardController::class, 'store']);
+
+Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.show');
 
 Route::get('/settings', [SettingsController::class, 'index']);
 
