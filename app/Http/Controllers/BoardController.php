@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BoardRequest;
 use App\Http\Resources\BoardResource;
 use App\Models\Board;
 use Exception;
+use Illuminate\Cache\NullStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -18,14 +20,25 @@ class BoardController extends Controller
             ->get();
         
         Log::debug('index 들어옴'.$boards);
-
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
             ]);
     }      
-    public function create()
+    public function createPage($id = null)
     {
-        return Inertia::render('Board/BoardCreate');
+        if ($id)
+        {
+            $board = Board::where('isDeleted',false)
+                ->whereId($id)
+                ->first();
+            return Inertia::render('Board/BoardCreate',[
+                'board'=> $board
+            ]);
+        }else
+        {
+            return Inertia::render('Board/BoardCreate');
+        }
+        
     }
 
     public function store(Request $request)
@@ -36,13 +49,8 @@ class BoardController extends Controller
                     'author' => $request['author'],
                     'content' => $request['content'],
                 ]);
-                new BoardResource($board);
-                Log::alert("store실행됨");
-
-                // return redirect()->to('home.index');
-                return response([
-                    'success'=> true
-                ]);
+                
+                return Inertia::location("/board/{$board->id}");
         }catch(Exception $e){
             $e -> getMessage();
         }
@@ -51,17 +59,43 @@ class BoardController extends Controller
 
     public function show($id)
     {
-        Log::debug("Board/show 실행");
         $board = Board::where('isDeleted',false)
                         ->whereId($id)
                         ->first();
-        if (!$board)
-        {
-            return response() -> json(['error'=>'There no post',404]);
-        }
 
         return Inertia::render('Board/BoardContent',[
             'board' => $board
         ]);
+    }
+
+    public function update($id, BoardRequest $request){
+        try{
+            $board = Board::where('isDeleted',false)
+                        ->whereId($id)
+                        ->first();
+
+            $board->update($request->validated());
+            $updatedBoard = new BoardResource($board);
+            
+            return Inertia::render('Board/BoardContent',[
+                'board' => $updatedBoard->toArray(request())
+            ]);            
+        }catch(Exception $e){
+            $e -> getMessage($e);
+        }
+    }
+
+    public function destroy($id){
+
+        // $board = Board::where('isDeleted',false)
+        //                 ->whereId($id)
+        //                 ->first();
+        // $board->update('isDeleted',true);
+
+        Board::where('id',$id) -> update([
+            'isDeleted'=> true
+        ]);
+
+        return Inertia::location("/");
     }
 }

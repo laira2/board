@@ -31,9 +31,5 @@ class Board extends Model
 {
     protected $table = 'board';
 
-    use HasUuids;
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     protected $fillable = ['title','content','author'];
 }

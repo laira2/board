@@ -16,6 +16,7 @@
                     <div class="flex flex-col gap-1  ">
                         <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
                         <Textarea v-model="form.content" name="content" type="text" placeholder="content" fluid rows="10" cols="30" />
+                        <!-- TODO: Editor 연결 -->
 <!--                         
                         <Editor v-model="form.content" editorStyle="height: 320px">
                             <template v-slot:toolbar>
@@ -36,30 +37,46 @@
 </template>
 
 <script setup>
-import { reactive, toRaw } from 'vue';
+import { onMounted, reactive, toRaw } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Textarea from 'primevue/textarea';
+import { useForm } from '@inertiajs/vue3'
+import { title } from '@primeuix/themes/aura/card';
 // import Toast from 'primevue/toast';
 
 // const toast = useToast();
+const props = defineProps({
+    board : {
+        type: Array,
+    }
+})
 
-const form = reactive({
+const form = useForm({
     title: '',
     author: '',
-    content: '',
+    content: ''
 });
 
-const onFormSubmit = async() => {
-    try{
-        const response = await axios.post('/api/board', toRaw(form));
-        // console.log('submitted:', response.data);
-
-        // if(response.data.success){
-        //     window.location.href = '/';
-        // }
-    }catch(error){
-        console.log('submit fail',error);
+onMounted(()=>{
+    if (props.board) {
+        form.title = props.board.title
+        form.author = props.board.author
+        form.content = props.board.content
     }
+})
+
+
+const onFormSubmit = () => {
+    if(props.board){
+        console.log("form.put 실행");
+        form.put(`/board/${props.board.id}`);
+    }else{
+        form.post('/board/post', {
+                onSuccess: () => {
+                }
+            });
+    };
     
-};
+}
+
 </script>
