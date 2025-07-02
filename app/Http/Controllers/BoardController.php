@@ -18,7 +18,6 @@ class BoardController extends Controller
             ->get();
         
         Log::debug('index 들어옴'.$boards);
-        // return redirect()->to('home.index');
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
             ]);
@@ -38,19 +37,7 @@ class BoardController extends Controller
                 ]);
                 $newBoard = new BoardResource($board);
                 
-                Log::alert("newBoard생성");
-                Log::alert("{$board ->id}");
                 return Inertia::location("/board/{$board->id}");
-                // return redirect()->route('boardpost.show', $board->id);
-                // return redirect()->away('https://www.google.com');
-                // return Inertia::render('Board/BoardContent',[
-                //     'board' => $newBoard
-                // ]);
-
-                // return redirect()->to('home.index');
-                // return response([
-                //     'success'=> true
-                // ]);
         }catch(Exception $e){
             $e -> getMessage();
         }
@@ -59,14 +46,9 @@ class BoardController extends Controller
 
     public function show($id)
     {
-        Log::debug("Board/show 실행");
-        Log::debug("Request headers: " . json_encode(request()->headers->all()));
-        Log::debug("Is Inertia request: " . (request()->header('X-Inertia') ? 'YES' : 'NO'));
-        
         $board = Board::where('isDeleted',false)
                         ->whereId($id)
                         ->first();
-        Log::debug("조회된 board: ".$board);
 
         return Inertia::render('Board/BoardContent',[
             'board' => $board

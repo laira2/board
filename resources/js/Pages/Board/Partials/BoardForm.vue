@@ -16,6 +16,7 @@
                     <div class="flex flex-col gap-1  ">
                         <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
                         <Textarea v-model="form.content" name="content" type="text" placeholder="content" fluid rows="10" cols="30" />
+                        <!-- TODO: Editor 연결 -->
 <!--                         
                         <Editor v-model="form.content" editorStyle="height: 320px">
                             <template v-slot:toolbar>
@@ -44,6 +45,7 @@ import { useForm } from '@inertiajs/vue3'
 
 // const toast = useToast();
 
+
 const form = useForm({
     title: '',
     author: '',
@@ -52,21 +54,9 @@ const form = useForm({
 const onFormSubmit = () => {
     form.post('/board/post', {
         onSuccess: () => {
-            // 성공 시 자동 리다이렉트
+
         }
     });
 }
-// const onFormSubmit = async() => {
-//     try{
-        // const response = await axios.post('/board/post', toRaw(form));
-        // console.log('submitted:', response.data);
 
-        // if(response.data.success){
-        //     window.location.href = '/';
-        // }
-//     }catch(error){
-//         console.log('submit fail',error);
-//     }
-    
-// };
 </script>
