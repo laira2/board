@@ -37,26 +37,46 @@
 </template>
 
 <script setup>
-import { reactive, toRaw } from 'vue';
+import { onMounted, reactive, toRaw } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Textarea from 'primevue/textarea';
 import { useForm } from '@inertiajs/vue3'
+import { title } from '@primeuix/themes/aura/card';
 // import Toast from 'primevue/toast';
 
 // const toast = useToast();
-
+const props = defineProps({
+    board : {
+        type: Array,
+    }
+})
 
 const form = useForm({
     title: '',
     author: '',
     content: ''
 });
-const onFormSubmit = () => {
-    form.post('/board/post', {
-        onSuccess: () => {
 
-        }
-    });
+onMounted(()=>{
+    if (props.board) {
+        form.title = props.board.title
+        form.author = props.board.author
+        form.content = props.board.content
+    }
+})
+
+
+const onFormSubmit = () => {
+    if(props.board){
+        console.log("form.put 실행");
+        form.put(`/board/${props.board.id}`);
+    }else{
+        form.post('/board/post', {
+                onSuccess: () => {
+                }
+            });
+    };
+    
 }
 
 </script>

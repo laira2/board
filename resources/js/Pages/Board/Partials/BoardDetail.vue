@@ -5,7 +5,7 @@
         <template #title>
             <div class="flex justify-between m-4">
                 <h1>{{ board.title}}</h1>
-                
+                <slot name="BoardComments" />                    
             </div>
             </template> 
         <template #subtitle>
@@ -27,19 +27,27 @@
             
         </template>
         <template #footer>
-            <div class="flex gap-4 mt-1">
-                <Button label="Cancel" severity="secondary" outlined class="w-full" />
-                <Button label="Save" class="w-full" />
+            <div class="flex justify-end gap-4 mt-1">
+                <!-- TODO: create 재활용?? -->
+                <Link :href="`/board/post/${board.id}`">
+                    <Button label="수정" class="w-15" /> 
+                </Link>
+                <Link :href="`/board/delete/${board.id}`" method="delete" >
+                    <Button label="삭제" severity="secondary" outlined class="w-15" /> 
+                </Link> 
+                <Link :href="`/`" >
+                    <Button label="목록" severity="secondary" outlined class="w-15" /> 
+                </Link> 
             </div>
         </template>
     </Card>
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3'
+
 
 const props = defineProps({
   board: Array 
 });
-console.log("boardDetail board:", props);
-
 </script>

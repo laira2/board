@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BoardRequest;
 use App\Http\Resources\BoardResource;
 use App\Models\Board;
 use Exception;
+use Illuminate\Cache\NullStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -22,9 +24,21 @@ class BoardController extends Controller
                 'boards' => $boards,
             ]);
     }      
-    public function create()
+    public function createPage($id = null)
     {
-        return Inertia::render('Board/BoardCreate');
+        if ($id)
+        {
+            $board = Board::where('isDeleted',false)
+                ->whereId($id)
+                ->first();
+            return Inertia::render('Board/BoardCreate',[
+                'board'=> $board
+            ]);
+        }else
+        {
+            return Inertia::render('Board/BoardCreate');
+        }
+        
     }
 
     public function store(Request $request)
@@ -35,7 +49,6 @@ class BoardController extends Controller
                     'author' => $request['author'],
                     'content' => $request['content'],
                 ]);
-                $newBoard = new BoardResource($board);
                 
                 return Inertia::location("/board/{$board->id}");
         }catch(Exception $e){
@@ -53,5 +66,36 @@ class BoardController extends Controller
         return Inertia::render('Board/BoardContent',[
             'board' => $board
         ]);
+    }
+
+    public function update($id, BoardRequest $request){
+        try{
+            $board = Board::where('isDeleted',false)
+                        ->whereId($id)
+                        ->first();
+
+            $board->update($request->validated());
+            $updatedBoard = new BoardResource($board);
+            
+            return Inertia::render('Board/BoardContent',[
+                'board' => $updatedBoard->toArray(request())
+            ]);            
+        }catch(Exception $e){
+            $e -> getMessage($e);
+        }
+    }
+
+    public function destroy($id){
+
+        // $board = Board::where('isDeleted',false)
+        //                 ->whereId($id)
+        //                 ->first();
+        // $board->update('isDeleted',true);
+
+        Board::where('id',$id) -> update([
+            'isDeleted'=> true
+        ]);
+
+        return Inertia::location("/");
     }
 }

@@ -11,7 +11,7 @@ class BoardRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,9 +22,9 @@ class BoardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'title'],
-            'author' => ['requested', 'author'],
-            'content' => ['required', 'content']
+            'title' => ['required'],
+            'author' => ['required'],
+            'content' => ['required']
         ];
     }
 }
