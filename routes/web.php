@@ -8,6 +8,8 @@ Route::get('/', [BoardController::class, 'index'])->name('home.index');
 
 Route::get('/board/post', [BoardController::class, 'create']);
 
+Route::get('/board/{id}', [BoardController::class, 'show']);
+
 Route::get('/settings', [SettingsController::class, 'index']);
 
 Route::get('/layout', [BoardController::class, 'postpage']);

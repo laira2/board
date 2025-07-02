@@ -19,8 +19,6 @@ class BoardController extends Controller
         
         Log::debug('index 들어옴'.$boards);
 
-        Log::debug();
-
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
             ]);
@@ -41,10 +39,10 @@ class BoardController extends Controller
                 new BoardResource($board);
                 Log::alert("store실행됨");
 
-                return redirect()->to('home.index');
-                // return response([
-                //     'success'=> true
-                // ]);
+                // return redirect()->to('home.index');
+                return response([
+                    'success'=> true
+                ]);
         }catch(Exception $e){
             $e -> getMessage();
         }
@@ -53,6 +51,7 @@ class BoardController extends Controller
 
     public function show($id)
     {
+        Log::debug("Board/show 실행");
         $board = Board::where('isDeleted',false)
                         ->whereId($id)
                         ->first();

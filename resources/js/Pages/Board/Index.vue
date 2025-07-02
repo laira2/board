@@ -7,7 +7,7 @@
                         <template #body="slotProps">
                             <Link
                                 v-if="board.field === 'title'"
-                                :href="`/api/board/${slotProps.data.id}`"
+                                :href="`/board/${slotProps.data.id}`"
                                 class="text-blue-600 hover:underline"
                             >
                                 {{ slotProps.data[board.field] }}
