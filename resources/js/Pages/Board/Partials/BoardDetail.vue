@@ -5,7 +5,9 @@
         <template #title>
             <div class="flex justify-between m-4">
                 <h1>{{ board.title}}</h1>
-                <slot name="BoardComments" />                    
+                <OverlayBadge value="4" severity="danger" class="inline-flex">
+                    <Avatar label="댓글" size="large" />
+                </OverlayBadge>                  
             </div>
             </template> 
         <template #subtitle>
@@ -45,7 +47,7 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
-
+import Avatar from 'primevue/avatar';
 
 const props = defineProps({
   board: Array 

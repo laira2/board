@@ -11,7 +11,8 @@
                     </div>
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">작성자</label>
-                        <InputText v-model="form.author" name="author" type="text" placeholder="author" fluid />
+                        <InputText v-if="board.title === ''" v-model="form.author" name="author" type="text" placeholder="author" fluid />
+                        <InputText v-else v-model="form.author" name="author" type="text" placeholder="author" disabled="true" fluid />
                     </div>
                     <div class="flex flex-col gap-1  ">
                         <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
@@ -26,8 +27,7 @@
                                     <button v-tooltip.bottom="'Underline'" class="ql-underline"></button>
                                 </span>
                             </template>
-                        </Editor> -->
-                    
+                        </Editor> -->                    
                     </div>
                     <Button type="submit" severity="secondary" label="등록"/>
                 </Form>
