@@ -87,11 +87,6 @@ class BoardController extends Controller
 
     public function destroy($id){
 
-        // $board = Board::where('isDeleted',false)
-        //                 ->whereId($id)
-        //                 ->first();
-        // $board->update('isDeleted',true);
-
         Board::where('id',$id) -> update([
             'isDeleted'=> true
         ]);

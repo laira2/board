@@ -7,12 +7,12 @@
                 <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full ">
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">제목</label>
-                        <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />
+                        <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />   
                     </div>
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">작성자</label>
-                        <InputText v-if="board.title === ''" v-model="form.author" name="author" type="text" placeholder="author" fluid />
-                        <InputText v-else v-model="form.author" name="author" type="text" placeholder="author" disabled="true" fluid />
+                        <InputText :disabled="isAuthor" v-model="form.author" name="author" type="text" placeholder="author" fluid />
+                        
                     </div>
                     <div class="flex flex-col gap-1  ">
                         <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, toRaw } from 'vue';
+import { onMounted, ref, toRaw } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Textarea from 'primevue/textarea';
 import { useForm } from '@inertiajs/vue3'
@@ -57,11 +57,14 @@ const form = useForm({
     content: ''
 });
 
+const isAuthor = ref(false)
+
 onMounted(()=>{
     if (props.board) {
         form.title = props.board.title
         form.author = props.board.author
         form.content = props.board.content
+        isAuthor.value = true
     }
 })
 
