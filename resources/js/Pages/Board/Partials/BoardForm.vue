@@ -38,10 +38,8 @@
 
 <script setup>
 import { onMounted, ref, toRaw } from 'vue';
-import { useToast } from 'primevue/usetoast';
 import Textarea from 'primevue/textarea';
-import { useForm } from '@inertiajs/vue3'
-import { title } from '@primeuix/themes/aura/card';
+import { useForm } from '@inertiajs/vue3';
 // import Toast from 'primevue/toast';
 
 // const toast = useToast();
@@ -67,7 +65,6 @@ onMounted(()=>{
         isAuthor.value = true
     }
 })
-
 
 const onFormSubmit = () => {
     if(props.board){
