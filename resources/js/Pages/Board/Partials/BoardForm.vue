@@ -7,11 +7,12 @@
                 <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full ">
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">제목</label>
-                        <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />
+                        <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />   
                     </div>
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">작성자</label>
-                        <InputText v-model="form.author" name="author" type="text" placeholder="author" fluid />
+                        <InputText :disabled="isAuthor" v-model="form.author" name="author" type="text" placeholder="author" fluid />
+                        
                     </div>
                     <div class="flex flex-col gap-1  ">
                         <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
@@ -26,8 +27,7 @@
                                     <button v-tooltip.bottom="'Underline'" class="ql-underline"></button>
                                 </span>
                             </template>
-                        </Editor> -->
-                    
+                        </Editor> -->                    
                     </div>
                     <Button type="submit" severity="secondary" label="등록"/>
                 </Form>
@@ -37,11 +37,9 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, toRaw } from 'vue';
-import { useToast } from 'primevue/usetoast';
+import { onMounted, ref, toRaw } from 'vue';
 import Textarea from 'primevue/textarea';
-import { useForm } from '@inertiajs/vue3'
-import { title } from '@primeuix/themes/aura/card';
+import { useForm } from '@inertiajs/vue3';
 // import Toast from 'primevue/toast';
 
 // const toast = useToast();
@@ -57,14 +55,16 @@ const form = useForm({
     content: ''
 });
 
+const isAuthor = ref(false)
+
 onMounted(()=>{
     if (props.board) {
         form.title = props.board.title
         form.author = props.board.author
         form.content = props.board.content
+        isAuthor.value = true
     }
 })
-
 
 const onFormSubmit = () => {
     if(props.board){
