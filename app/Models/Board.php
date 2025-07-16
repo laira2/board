@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereIsDeleted($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereUpdatedAt($value)
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Board extends Model

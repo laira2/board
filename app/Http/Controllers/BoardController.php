@@ -6,17 +6,17 @@ use App\Http\Requests\BoardRequest;
 use App\Http\Resources\BoardResource;
 use App\Models\Board;
 use Exception;
-use Illuminate\Cache\NullStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\App;
 
 class BoardController extends Controller
 {
     public function index()
     {
-        $boards = Board::where('isDeleted', false)
-            ->orderBy('created_at', 'desc')
+        $boards = Board::orderBy('created_at', 'desc')
             ->get();
         
         Log::debug('index 들어옴'.$boards);
@@ -28,8 +28,7 @@ class BoardController extends Controller
     {
         if ($id)
         {
-            $board = Board::where('isDeleted',false)
-                ->whereId($id)
+            $board = Board::whereId($id)
                 ->first();
             return Inertia::render('Board/BoardCreate',[
                 'board'=> $board
@@ -59,19 +58,35 @@ class BoardController extends Controller
 
     public function show($id)
     {
-        $board = Board::where('isDeleted',false)
-                        ->whereId($id)
+        try{
+            Log::debug("board show 실행");
+            $board = Board::whereId($id)
                         ->first();
 
-        return Inertia::render('Board/BoardContent',[
-            'board' => $board
-        ]);
+            $CommentController = App(CommentController::class);
+            $comments = $CommentController->show($id);
+
+            if ($comments != null){
+                Log::alert("comment 존재 시 return");
+                return Inertia::render('Board/BoardContent',[
+                    'board' => $board,
+                    'comments' => $comments
+                ]);
+            }else{
+                return Inertia::render('Board/BoardContent',[
+                    'board' => $board,
+                ]);
+            }
+            
+        }catch(Exception $e){
+            $e -> getMessage();
+        }
+        
     }
 
     public function update($id, BoardRequest $request){
         try{
-            $board = Board::where('isDeleted',false)
-                        ->whereId($id)
+            $board = Board::whereId($id)
                         ->first();
 
             $board->update($request->validated());
@@ -81,15 +96,13 @@ class BoardController extends Controller
                 'board' => $updatedBoard->toArray(request())
             ]);            
         }catch(Exception $e){
-            $e -> getMessage($e);
+            $e -> getMessage();
         }
     }
 
     public function destroy($id){
 
-        Board::where('id',$id) -> update([
-            'isDeleted'=> true
-        ]);
+        Board::where('id',$id) -> delete();
 
         return Inertia::location("/");
     }

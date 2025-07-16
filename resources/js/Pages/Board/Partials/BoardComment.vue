@@ -1,18 +1,42 @@
 <template>
-    <div class="card">
-        <Accordion value="0">
-            <AccordionPanel value="0">
-                <AccordionHeader>Header I</AccordionHeader>
-                <AccordionContent>
-                    <p class="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </AccordionContent>
-            </AccordionPanel>
-        </Accordion>
-    </div>
+    <Card style="overflow: hidden" >
+        <template #title>
+            <div class="flex justify-between m-4 w-full">
+                댓글
+            </div>
+            </template> 
+        <template #subtitle>
+        </template>
+        <template #content class="h ">
+            <div class="h-auto m-4" v-if="comments != null">
+                <Comments :comments="comments" :board-id="board.id" />
+            </div>                
+        </template>
+        <template #footer>
+            <CommentForm :board-id="board.id" />
+        </template>
+        </Card>
 </template>
-
 <script setup>
+import { ref } from 'vue';
+import Comments from './Comments.vue';
+import CommentForm from './CommentForm.vue';
+
+const props = defineProps({
+  board: {
+        type: Object
+    },
+  comments: {
+        type: Array
+    },
+});
+
+const showComments = ref(false)
+
+const toggleComments = () => {
+  showComments.value = !showComments.value
+}
+
+
+
 </script>

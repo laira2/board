@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,4 @@ Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.sho
 
 Route::get('/settings', [SettingsController::class, 'index']);
 
-Route::get('/layout', [BoardController::class, 'postpage']);
+Route::post('/comment/post',[CommentController::class,'store']);

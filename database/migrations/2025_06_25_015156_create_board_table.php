@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('board', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->text('content');
-            $table->boolean('isDeleted')->default(false);
+            $table->string('title')->nullable(false);
+            $table->string('author')->nullable(false);
+            $table->text('content')->nullable(false);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
