@@ -1,5 +1,6 @@
 <template>
-    <Panel class="w-full p-panel-content-container m-0 p-0 items-center">
+    <Panel header="" class="w-full m-0 p-0 items-center ">
+
         <slot>
         </slot>
     </Panel>

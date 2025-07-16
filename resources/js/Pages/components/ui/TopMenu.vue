@@ -1,10 +1,3 @@
-<!-- <template>
-    <div class="grid grid-cols-12">
-        <a href="/">Board</a>
-        <a href="/settings">Settings</a>
-    </div>
-</template> -->
-
 <template>
     <div class="card m-0 p-0">
         <!-- 상단 메뉴바 -->
@@ -23,8 +16,6 @@
 
 <script setup>
 import { ref } from "vue";
-const Title = ref("Baord");
-
 const items = ref([
     {
         label: 'Home',

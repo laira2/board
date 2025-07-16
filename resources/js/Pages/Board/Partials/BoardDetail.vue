@@ -45,9 +45,8 @@
                 </template>
             </Card>
         </div>
-        <div v-if="showComments" class="w-1/2 border-l pl-4 overflow-y-auto">
-            <BoardComment 
-                
+        <div v-if="showComments" class="w-1/3 overflow-y-auto">
+            <BoardComment                 
                 :comments="comments" :board="board"/>
         </div>
     </div>
@@ -74,7 +73,7 @@ const toggleComments = () => {
 }
 const boardCardClass = computed(() => {
     return showComments.value 
-        ? 'w-1/2 transition-all duration-300 ease-in-out' 
+        ? 'w-2/3 transition-all duration-300 ease-in-out' 
         : 'w-full transition-all duration-300 ease-in-out';
 });
 

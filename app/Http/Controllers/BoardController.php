@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use App\Http\Controllers\CommentController;
-use Illuminate\Support\Facades\App;
 
 class BoardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $boards = Board::orderBy('created_at', 'desc')
-            ->get();
         
-        Log::debug('index 들어옴'.$boards);
+         $perPage = $request->input('per_page', 10);
+        $boards = Board::orderBy('created_at', 'desc')->paginate($perPage);
+        
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
             ]);
-    }      
+    }  
+    
     public function createPage($id = null)
     {
         if ($id)
