@@ -16,7 +16,7 @@ class BoardController extends Controller
     public function index(Request $request)
     {
         
-         $perPage = $request->input('per_page', 10);
+        $perPage = $request->input('per_page', 10);
         $boards = Board::orderBy('created_at', 'desc')->paginate($perPage);
         
         return Inertia::render('Board/Index', [

@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment wherePostId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $allChildren
+ * @property-read int|null $all_children_count
  * @mixin \Eloquent
  */
 class Comment extends Model

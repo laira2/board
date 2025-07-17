@@ -31,7 +31,8 @@ const items = ref([
         items: [
             {
                 label: 'Components',
-                icon: 'pi pi-bolt'
+                icon: 'pi pi-bolt',
+                url: '/settings'
             },
             {
                 label: 'Blocks',
