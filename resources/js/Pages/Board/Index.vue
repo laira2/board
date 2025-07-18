@@ -1,5 +1,5 @@
 <template >
-    <BoardLayout>
+    <BoardLayout :menus="menus">
         <GContentPanel>
             <div class="w-full">
                 <DataTable :value="boards.data" tableStyle="min-width: 50rem" >
@@ -40,6 +40,9 @@ import GContentPanel from '../components/GContentPanel.vue';
 
 const props = defineProps({
     boards: {
+        type: Object
+    },
+    menus: {
         type: Object
     }
 });

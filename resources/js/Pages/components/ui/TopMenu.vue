@@ -16,6 +16,12 @@
 
 <script setup>
 import { ref } from "vue";
+
+const props = defineProps({
+    menus:{
+        type: Object
+    }
+});
 const items = ref([
     {
         label: 'Home',

@@ -10,12 +10,12 @@
                         <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />   
                     </div>
                     <div class="flex flex-col gap-1 flex-row">
-                        <label name="title" value="title" class="w-20 flex items-center">작성자</label>
+                        <label name="author" value="author" class="w-20 flex items-center">작성자</label>
                         <InputText :disabled="isAuthor" v-model="form.author" name="author" type="text" placeholder="author" fluid />
                         
                     </div>
                     <div class="flex flex-col gap-1  ">
-                        <label name="title" value="title" class="w-20 flex items-baseline">내용</label>
+                        <label name="content" value="content" class="w-20 flex items-baseline">내용</label>
                         <Textarea v-model="form.content" name="content" type="text" placeholder="content" fluid rows="10" cols="30" />
                         <!-- TODO: Editor 연결 -->
 <!--                         

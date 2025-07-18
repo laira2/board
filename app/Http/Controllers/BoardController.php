@@ -3,24 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BoardRequest;
-use App\Http\Resources\BoardResource;
-use App\Models\Board;
+use App\Models\TopMenu;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
-use App\Http\Controllers\CommentController;
+use App\Services\BoardService;
+use App\Services\CommentService;
+use App\Services\TopMenuService;
 
 class BoardController extends Controller
 {
+    public function __construct(
+        private BoardService $boardService,
+        private CommentService $commentService,
+        private TopMenuService $topMenuService
+
+    )
+    {        
+    }
+
     public function index(Request $request)
     {
-        
-        $perPage = $request->input('per_page', 10);
-        $boards = Board::orderBy('created_at', 'desc')->paginate($perPage);
-        
+        $boards = $this -> boardService -> getBoards($request);
+        $topmenus = $this -> topMenuService -> getAllTopmenu();
+       
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
+                'topmenus'=> $topmenus
             ]);
     }  
     
@@ -28,8 +37,8 @@ class BoardController extends Controller
     {
         if ($id)
         {
-            $board = Board::whereId($id)
-                ->first();
+            $board = $this->boardService ->getBoard($id);
+
             return Inertia::render('Board/BoardCreate',[
                 'board'=> $board
             ]);
@@ -43,13 +52,10 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         try{
-               $board = Board::create([
-                    'title' => $request['title'],
-                    'author' => $request['author'],
-                    'content' => $request['content'],
-                ]);
-                
-                return Inertia::location("/board/{$board->id}");
+               
+            $new_board = $this->boardService->createPost($request);
+            return Inertia::location("/board/{$new_board->id}");
+
         }catch(Exception $e){
             $e -> getMessage();
         }
@@ -59,15 +65,12 @@ class BoardController extends Controller
     public function show($id)
     {
         try{
-            Log::debug("board show 실행");
-            $board = Board::whereId($id)
-                        ->first();
+            $board = $this -> boardService -> getBoard($id);
 
-            $CommentController = App(CommentController::class);
-            $comments = $CommentController->show($id);
+            
+            $comments = $this -> commentService -> getComments($id);
 
             if ($comments != null){
-                Log::alert("comment 존재 시 return");
                 return Inertia::render('Board/BoardContent',[
                     'board' => $board,
                     'comments' => $comments
@@ -86,14 +89,12 @@ class BoardController extends Controller
 
     public function update($id, BoardRequest $request){
         try{
-            $board = Board::whereId($id)
-                        ->first();
-
-            $board->update($request->validated());
-            $updatedBoard = new BoardResource($board);
+            
+            
+            $updated_board = $this -> boardService ->updateBoard($id, $request);
             
             return Inertia::render('Board/BoardContent',[
-                'board' => $updatedBoard->toArray(request())
+                'board' => $updated_board
             ]);            
         }catch(Exception $e){
             $e -> getMessage();
@@ -102,7 +103,7 @@ class BoardController extends Controller
 
     public function destroy($id){
 
-        Board::where('id',$id) -> delete();
+        $this -> boardService -> deleteBoard($id);
 
         return Inertia::location("/");
     }

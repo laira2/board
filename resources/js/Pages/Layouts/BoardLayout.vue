@@ -6,7 +6,7 @@
                     BOARD
                 </Link> 
             </template>
-            <TopMenu />
+            <TopMenu :menus='menus' />
         </Panel> 
         <slot>
             <!-- content 영역 -->
@@ -21,4 +21,9 @@ import { Link } from '@inertiajs/vue3';
 import TopMenu from "../components/ui/TopMenu.vue";
 import Footer from "../components/ui/Footer.vue";
 
+const props = defineProps({
+    menus:{
+        type: Object
+    }
+})
 </script>

@@ -23,4 +23,7 @@ Route::get('/settings', [SettingsController::class, 'index']);
 Route::post('/comment/post',[CommentController::class,'store']);
 
 Route::get('/settings',[SettingsController::class,'index']);
+
 Route::get('/menu/{code}',[TopMenuController::class,'handle']);
+
+Route::post('/menu/post', [TopMenuController::class, 'store']);
