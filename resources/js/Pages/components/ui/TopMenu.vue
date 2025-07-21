@@ -1,13 +1,5 @@
-<!-- <template>
-    <div class="grid grid-cols-12">
-        <a href="/">Board</a>
-        <a href="/settings">Settings</a>
-    </div>
-</template> -->
-
 <template>
     <div class="card m-0 p-0">
-        <!-- 상단 메뉴바 -->
         <Menubar :model="items">
             <template #item="{ item, props, hasSubmenu, root }">
                 <a v-ripple :href="item.url" class="flex items-center m-0 p-0" v-bind="props.action">
@@ -19,12 +11,21 @@
             </template>                
         </Menubar>      
     </div>
+    <div class="flex">
+        <!-- <Link :href="settings.index" >환경설정</Link> -->
+         
+    </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const Title = ref("Baord");
+import { Link } from '@inertiajs/vue3';
 
+const props = defineProps({
+    menus:{
+        type: Object
+    }
+});
 const items = ref([
     {
         label: 'Home',
@@ -40,7 +41,8 @@ const items = ref([
         items: [
             {
                 label: 'Components',
-                icon: 'pi pi-bolt'
+                icon: 'pi pi-bolt',
+                url: '/settings'
             },
             {
                 label: 'Blocks',

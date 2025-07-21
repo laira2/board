@@ -1,13 +1,17 @@
 <script setup>
-// import { ref } from 'vue';
-// import TopMenu from '../../ui/components/TopMenu.vue';
-// import PageName from '../../ui/components/PageName.vue';
+import GContentPanel from '../components/GContentPanel.vue';
+import BoardLayout from '../Layouts/BoardLayout.vue';
+import SettingMenu from './Partials/SettingMenu.vue';
 
-const title = ref('');
-title.value = 'Settings';
+
 </script>
 
 <template>
-    <!-- <TopMenu/>
-    <PageName :title="title"/> -->
+    <BoardLayout>
+        <GContentPanel>
+            <div class="flex m-0 p-0">
+                <SettingMenu/>
+            </div>
+        </GContentPanel>
+    </BoardLayout>
 </template>

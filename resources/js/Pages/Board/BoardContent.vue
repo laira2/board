@@ -6,6 +6,9 @@ import BoardDetail from './Partials/BoardDetail.vue';
 const props = defineProps({
     board: {
         type: Array
+    },
+    comments: {
+        type: Array
     }
 });
 console.log("boardContent board:", props);
@@ -15,7 +18,7 @@ console.log("boardContent board:", props);
 <template>
     <BoardLayout>
         <GContentPanel>
-            <BoardDetail :board="board" />
+            <BoardDetail :board="board" :comments="comments" />
         </GContentPanel>
     </BoardLayout>
 </template>

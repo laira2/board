@@ -1,47 +1,56 @@
 <template >
-    <BoardLayout>
+    <BoardLayout :menus="menus">
         <GContentPanel>
-            <div class="card items-center">
-                <DataTable :value="boards" tableStyle="min-width: 50rem">
-                    <Column v-for="board of columns" :key="board.field" :field="board.field" :header="board.header">
+            <div class="w-full">
+                <DataTable :value="boards.data" tableStyle="min-width: 50rem" >
+                    <Column field="id" header="ID" style="width: 15%"></Column>
+                    <Column field="title" header="Title" style="width: 40%">
                         <template #body="slotProps">
-                            <Link
-                                v-if="board.field === 'title'"
-                                :href="`/board/${slotProps.data.id}`"
-                                class="text-blue-600 hover:underline"
-                            >
-                                {{ slotProps.data[board.field] }}
+                            <Link  :href="`/board/${slotProps.data.id}`">
+                                {{ slotProps.data.title }}
                             </Link>
-                            <!-- <a v-if="board.field === 'title'" :href="`/board/${slotProps.data.id}`" class="text-blue-600 hover:underline">
-                                {{ slotProps.data[board.field] }}
-                            </a> -->
-                            <span v-else>
-                                {{ slotProps.data[board.field] }}
-                            </span>
                         </template>
                     </Column>
+                    <Column field="updated_at" header="updatedAt" style="width: 15%"></Column>
+                    <Column field="author" header="Author" style="width: 15%"></Column>                    
                 </DataTable>
-            </div>  
+                <div class="items-center">
+                    <Paginator 
+                        :rows="boards.per_page"
+                        :totalRecords="boards.total"
+                        :first="(boards.current_page - 1) * boards.per_page"
+                        @page="onPageChange">
+                        <template #start="slotProps">
+                            Page: {{ boards.current_page }}
+                        </template>
+                    </Paginator>
+                </div>
+            </div> 
         </GContentPanel>
     </BoardLayout>
 </template>
 
 <script setup>
 import DataTable from 'primevue/datatable';
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import Column from 'primevue/column';
+import Paginator from 'primevue/paginator';
 import BoardLayout from '../Layouts/BoardLayout.vue';
 import GContentPanel from '../components/GContentPanel.vue';
 
 const props = defineProps({
     boards: {
-        type: Array
+        type: Object
+    },
+    menus: {
+        type: Object
     }
 });
-const columns = [
-    { field: 'id', header: 'ID' },
-    { field: 'title', header: '제목' },
-    { field: 'author', header: '작성자' },
-    { field: 'updated_at', header: '수정일' }
-];
+
+function onPageChange(event) {
+  const page = event.page + 1 
+  const perPage = event.rows
+  router.get(`/?page=${page}&per_page=${perPage}`)
+}
+
 </script>

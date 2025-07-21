@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TopMenuController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BoardController::class, 'index'])->name('home.index');
@@ -18,4 +20,10 @@ Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.sho
 
 Route::get('/settings', [SettingsController::class, 'index']);
 
-Route::get('/layout', [BoardController::class, 'postpage']);
+Route::post('/comment/post',[CommentController::class,'store']);
+
+Route::get('/settings',[SettingsController::class,'index'])->name('settings.index');
+
+Route::get('/menu/{code}',[TopMenuController::class,'handle']);
+
+Route::post('/menu/post', [TopMenuController::class, 'store']);

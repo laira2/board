@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('board', function (Blueprint $table) {
+        Schema::create('topmenu', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable(false);
-            $table->string('author')->nullable(false);
-            $table->text('content')->nullable(false);
-
+            $table->string('code')->nullable(false)->unique();
+            $table->string('name')->nullable(false);
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('board');
+        Schema::dropIfExists('topmenu');
     }
 };
