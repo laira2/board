@@ -1,6 +1,5 @@
 <template>
     <div class="card m-0 p-0">
-        <!-- 상단 메뉴바 -->
         <Menubar :model="items">
             <template #item="{ item, props, hasSubmenu, root }">
                 <a v-ripple :href="item.url" class="flex items-center m-0 p-0" v-bind="props.action">
@@ -12,10 +11,15 @@
             </template>                
         </Menubar>      
     </div>
+    <div class="flex">
+        <!-- <Link :href="settings.index" >환경설정</Link> -->
+         
+    </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     menus:{

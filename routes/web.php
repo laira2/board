@@ -22,7 +22,7 @@ Route::get('/settings', [SettingsController::class, 'index']);
 
 Route::post('/comment/post',[CommentController::class,'store']);
 
-Route::get('/settings',[SettingsController::class,'index']);
+Route::get('/settings',[SettingsController::class,'index'])->name('settings.index');
 
 Route::get('/menu/{code}',[TopMenuController::class,'handle']);
 

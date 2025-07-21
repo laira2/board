@@ -29,6 +29,6 @@ class Url extends Model
     //
     protected $table = 'url';
 
-    protected $fillable = ['code', 'url'];
+    protected $fillable = ['topmenu_code', 'url'];
 
 }

@@ -6,7 +6,11 @@ import Tab from 'primevue/tab';
 import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
 import MenuForm from './MenuForm.vue';
-
+const props = defineProps({
+    menus:{
+        type: Object
+    }
+})
 
 </script>
 
@@ -20,7 +24,16 @@ import MenuForm from './MenuForm.vue';
             </TabList>
             <TabPanels>
                 <TabPanel value="0">
-                    <MenuForm :menus="menus "/>
+                    <div>
+                        <DataTable :value="menus" tableStyle="min-width: 50rem">
+                            <Column field="id" header="Id" style="width: 15%"></Column>
+                            <Column field="code" header="Code" style="width: 25%"></Column>
+                            <Column field="name" header="Name" style="width: 25%"></Column>
+                            <Column field="decription" header="Decription" style="width: 35%"></Column>
+                        </DataTable>
+                    </div>
+    
+                    <MenuForm/>
                     
                 </TabPanel>
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\TopMenu;
+use App\Models\Url;
 use Illuminate\Http\Request;
 
 class TopMenuService
@@ -21,6 +22,11 @@ class TopMenuService
             'code'=>$request['code'],
             'name' => $request['name'],
             'description' => $request['description']
+        ]);
+
+        $new_url = Url::create([
+            'topmenu_code'=>$request['code'],
+            'url' => $request['url'],
         ]);
 
         return $new_menu;
