@@ -81,6 +81,8 @@ class BoardService
      */
     public function deleteBoard($id)
     {
-        Board::where('id', $id)->delete();
+        $board = Board::find($id);
+        $board ->delete();
+
     }
 }

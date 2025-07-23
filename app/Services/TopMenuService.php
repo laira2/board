@@ -69,10 +69,9 @@ class TopMenuService
 
     public function deleteMenu($id)
     {
-        $topmenu = TopMenu::whereId($id)
-                    ->first();
+        $topmenu = TopMenu::fidn($id);
         
-        TopMenu::whereId($id)->delete();
+        $topmenu -> delete();
 
     }
 }

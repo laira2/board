@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\TopmenuObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -26,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TopMenu whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+#[ObservedBy([TopmenuObserver::class])]
 class TopMenu extends Model
 {
     //

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\UrlObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Url whereUrl($value)
  * @mixin \Eloquent
  */
+#[ObservedBy([UrlObserver::class])]
 class Url extends Model
 {
     //
