@@ -3,8 +3,7 @@
         <Tabs value="0">
             <TabList>
                 <Tab value="0">Menu 관리</Tab>
-                <Tab value="1">Header II</Tab>
-                <Tab value="2">Header III</Tab>
+                <Tab value="1">관리</Tab>
             </TabList>
             <TabPanels>
                 <TabPanel value="0">
@@ -22,8 +21,7 @@
                                     </Button>
                                 </template> 
                                 <template #body="slotProps">
-                                    <Button label="관리" @click="updateButton(slotProps.data)" severity="secondary" variant="text" class="w-15" />
-                                    
+                                    <Button label="관리" @click="updateButton(slotProps.data)" severity="secondary" variant="text" class="w-15" />                                    
                                 </template>
                             </Column>
                         </DataTable>
@@ -33,6 +31,7 @@
                     </Drawer>    
                     <Drawer v-model:visible="visibleUpdate" header="메뉴 수정" position="bottom" style="height: auto">
                         <MenuForm :menu="selectedMenu" />
+                        
                     </Drawer> 
                                        
                 </TabPanel>
@@ -49,6 +48,7 @@ import TabPanel from 'primevue/tabpanel';
 import MenuForm from './MenuForm.vue';
 import Drawer from 'primevue/drawer';
 import { ref } from "vue";
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     menus:{

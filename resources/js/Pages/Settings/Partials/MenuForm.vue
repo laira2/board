@@ -11,21 +11,25 @@
             <label name="url" value="url" class="w-20 flex items-center">URL</label>
             <InputText type="text" v-model="menuForm.url" class="ml-0 mr-3.5" style="width: 10%"/>
             <Button type="submit" severity="secondary" label="등록" style="width: 10%" />
+            <div v-if="props.menu!=null">
+                <Link :href="`/menu/delete/${menu.id}`" method="delete" as="button" class="items-end">
+                    <Button type="button" label="Danger" severity="danger" variant="text">삭제</Button>
+                </Link>
+            </div>
+            
         </Form>        
     </div>
     
 </template>
 <script setup>
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import { useForm } from '@inertiajs/vue3';
+import { useForm,Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     menu:{
         type: Object,
     }
 })
-
+console.log(props.menu)
 const menuForm = useForm({
     code:'',
     name:'',

@@ -48,4 +48,10 @@ class TopMenuController extends Controller
         return Inertia::location("/settings");
 
     }
+
+    public function destroy($id)
+    {
+        $this -> topMenuService -> deleteMenu($id);
+        return Inertia::location("/settings");
+    }
 }

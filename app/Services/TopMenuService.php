@@ -60,10 +60,19 @@ class TopMenuService
             'description' => $validated['description'] ?? null,
         ]);  
         if ($url) {
-        $url->update([
-            'topmenu_code' => $validated['code'],
-            'url' => $validated['url'],
-        ]);
+            $url->update([
+                'topmenu_code' => $validated['code'],
+                'url' => $validated['url'],
+            ]);
+        }
     }
+
+    public function deleteMenu($id)
+    {
+        $topmenu = TopMenu::whereId($id)
+                    ->first();
+        
+        TopMenu::whereId($id)->delete();
+
     }
 }

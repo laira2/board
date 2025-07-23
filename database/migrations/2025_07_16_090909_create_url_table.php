@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('url')->nullable(false);
             $table->string('topmenu_code')->nullable(false);
-            $table->foreign('topmenu_code')->references('code')->on('topmenu');
+            $table->foreign('topmenu_code')->references('code')->on('topmenu')->cascadeOnDelete();;
             $table->softDeletes();
             $table->timestamps();
         });
