@@ -20,15 +20,31 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import { useForm } from '@inertiajs/vue3';
 
+const props = defineProps({
+    menu:{
+        type: Object,
+    }
+})
+
 const menuForm = useForm({
     code:'',
     name:'',
     description:'',
     url: ''
 });
+if(props.menu!=null){
+    menuForm.code = props.menu.code
+    menuForm.name = props.menu.name
+    menuForm.description = props.menu.description
+    menuForm.url = props.menu.url
 
+}
 const onFormSubmit = ()=>{
-    menuForm.post('/menu/post');
+    if(props.menu!=null){
+        menuForm.put(`/menu/${props.menu.id}`);
+    }else{
+        menuForm.post('/menu/post');
+    }   
 
 }
 </script>

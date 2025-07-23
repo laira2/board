@@ -6,7 +6,7 @@
                     <div class="flex justify-between m-4 w-full">
                         <h1>{{ board.title}}</h1>
                         <div>
-                            <Link :href="`/board/post/${board.id}`">
+                            <Link :href="`/menu/board/post/${board.id}`">
                                 <Button label="수정" class="w-15" /> 
                             </Link>
                             <Link :href="`/board/delete/${board.id}`" method="delete" >

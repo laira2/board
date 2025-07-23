@@ -25,11 +25,11 @@ class BoardController extends Controller
     public function index(Request $request)
     {
         $boards = $this -> boardService -> getBoards($request);
-        $topmenus = $this -> topMenuService -> getAllTopmenu();
+        $menus = $this -> topMenuService -> joinUrl();
        
         return Inertia::render('Board/Index', [
                 'boards' => $boards,
-                'topmenus'=> $topmenus
+                'menus'=> $menus
             ]);
     }  
     
