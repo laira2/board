@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\CommentObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $all_children_count
  * @mixin \Eloquent
  */
+#[ObservedBy([CommentObserver::class])]
 class Comment extends Model
 {
     //

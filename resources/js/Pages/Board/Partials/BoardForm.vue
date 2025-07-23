@@ -2,7 +2,6 @@
     <BoardLayout>
         <GContentPanel>
             <div class="card flex justify-center w-auto">
-                <!-- <Toast /> -->
                 
                 <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full ">
                     <div class="flex flex-col gap-1 flex-row">

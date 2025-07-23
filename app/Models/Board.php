@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Observers\BoardObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 
@@ -29,8 +31,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereDeletedAt($value)
  * @mixin \Eloquent
  */
+
+#[ObservedBy([BoardObserver::class])]
 class Board extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'board';
 
     protected $fillable = ['title','content','author'];

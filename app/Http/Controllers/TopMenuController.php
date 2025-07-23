@@ -38,7 +38,20 @@ class TopMenuController extends Controller
     public function store (Request $request)
     {
         $this -> topMenuService -> createMenu($request);
-        $topmenus =$this ->topMenuService -> getAllTopmenu();
+        // $topmenus =$this ->topMenuService -> getAllTopmenu();
+        return Inertia::location("/settings");
+    }
+    
+    public function update (Request $request, $id)
+    {
+        $this -> topMenuService -> updateMenu($id, $request);
+        return Inertia::location("/settings");
+
+    }
+
+    public function destroy($id)
+    {
+        $this -> topMenuService -> deleteMenu($id);
         return Inertia::location("/settings");
     }
 }
