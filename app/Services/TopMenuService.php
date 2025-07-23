@@ -15,6 +15,10 @@ class TopMenuService
         $topmenus = TopMenu::get();
         return $topmenus;
     }
+
+    /**
+     * 메뉴, Url 합친 값
+     */
     public function getTopmenu($id){
         $topmenu = TopMenu::whereId($id) ->first();
         return $topmenu;
@@ -69,7 +73,7 @@ class TopMenuService
 
     public function deleteMenu($id)
     {
-        $topmenu = TopMenu::fidn($id);
+        $topmenu = TopMenu::find($id);
         
         $topmenu -> delete();
 
