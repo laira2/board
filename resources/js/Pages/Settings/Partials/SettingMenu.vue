@@ -7,7 +7,7 @@
             <TabPanels>
                 <TabPanel value="0">
                     <div>
-                        <DataTable :value="menus" tableStyle="min-width: 50rem">
+                        <DataTable :value="topmenus" tableStyle="min-width: 50rem">
                             <Column field="id" header="Id" style="width: 10%"></Column>
                             <Column field="code" header="Code" style="width: 20%"></Column>
                             <Column field="name" header="Name" style="width: 20%"></Column>
@@ -50,11 +50,11 @@ import { ref } from "vue";
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
-    menus:{
+    topmenus:{
         type: Object
     }
 })
-
+console.log(props.topmenus);
 const visibleRegister = ref(false);
 const visibleUpdate = ref(false);
 const selectedMenu = ref(null);

@@ -24,7 +24,8 @@ class TopMenuRequest extends FormRequest
         return [
             'code' => ['required'],
             'name' => ['required'],
-            'description' => ['required']
+            'description' => ['required'],
+            'is_activate' => ['required']
         ];
     }
 }

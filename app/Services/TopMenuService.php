@@ -12,19 +12,26 @@ class TopMenuService
      * 전체 메뉴 조회
      */
     public function getAllTopmenu(){
-        $topmenus = TopMenu::get();
+        $topmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
+                ->select('topmenu.*', 'url.url')
+                ->get();
         return $topmenus;
     }
 
     /**
-     * 메뉴, Url 합친 값
+     * Topmenu 단일 조회
      */
     public function getTopmenu($id){
         $topmenu = TopMenu::whereId($id) ->first();
         return $topmenu;
     }
+
+    /**
+     * 메뉴, Url 합친 값
+     */
     public function joinUrl(){
         $menus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
+                ->where('topmenu.is_activate',true)
                 ->select('topmenu.*', 'url.url')
                 ->get();
         return $menus;
@@ -54,6 +61,7 @@ class TopMenuService
             'name' => 'required|string|max:100',
             'description' => 'nullable|string',
             'url' => 'required|string|max:255',
+            'is_activate' => 'required'
         ]);
 
         $topMenu = $this->getTopmenu($id);
@@ -62,6 +70,7 @@ class TopMenuService
             'code' => $validated['code'],
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
+            'is_activate' => $validated['is_activate']
         ]);  
         if ($url) {
             $url->update([

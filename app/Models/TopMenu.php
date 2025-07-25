@@ -34,6 +34,6 @@ class TopMenu extends Model
     //
     protected $table = 'topmenu';
 
-    protected $fillable = ['code', 'name', 'description'];
+    protected $fillable = ['code', 'name', 'description','is_activate'];
 
 }

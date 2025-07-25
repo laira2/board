@@ -13,10 +13,11 @@
             </div>
             <div class="flex justify-end mt-3">
                 <Button type="submit" label="등록" class="w-20 m-1" />
-                <div v-if="props.menu!=null">
+                <div v-if="props.menu!=null" class>                    
                     <Link :href="`/menu/delete/${menu.id}`" method="delete" as="button"  >
                         <Button type="button" label="Danger" :disabled="isCustomMenu(menu.name)" severity="danger" class="w-20 m-1" >삭제</Button>
                     </Link>
+                    <Checkbox class="w-20 m-1 items-center" :disabled="isCustomMenu(menu.name)" v-model="menuForm.is_activate" binary />
                 </div>  
             </div>       
         </Form> 
@@ -25,6 +26,7 @@
 </template>
 <script setup>
 import { useForm,Link } from '@inertiajs/vue3';
+import Checkbox from 'primevue/checkbox';
 
 const props = defineProps({
     menu:{
@@ -40,7 +42,8 @@ const menuForm = useForm({
     code:'',
     name:'',
     description:'',
-    url: ''
+    url: '',
+    is_activate: false
 });
 
 if(props.menu!=null){
@@ -48,6 +51,9 @@ if(props.menu!=null){
     menuForm.name = props.menu.name
     menuForm.description = props.menu.description
     menuForm.url = props.menu.url
+    if (props.menu.is_activate== true){
+        menuForm.is_activate = props.menu.is_activate === true;
+    } 
 
 }
 const onFormSubmit = ()=>{

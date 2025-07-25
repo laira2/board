@@ -34,6 +34,7 @@ class TopMenuController extends Controller
     public function update (Request $request, $id)
     {
         $this -> topMenuService -> updateMenu($id, $request);
+        Log::debug("menu 수정");
         return Inertia::location("/settings");
 
     }

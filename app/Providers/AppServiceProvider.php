@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -23,7 +24,9 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share([
         'menus' => function () {
             return app(\App\Services\TopMenuService::class)->joinUrl();
-        },
-    ]);
+            },
+        ]);
+        Log::debug("boot() 실행");
+        
     }
 }

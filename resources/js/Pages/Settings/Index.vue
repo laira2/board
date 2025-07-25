@@ -4,7 +4,7 @@ import BoardLayout from '../Layouts/BoardLayout.vue';
 import SettingMenu from './Partials/SettingMenu.vue';
 
 const props = defineProps({
-    menus: {
+    topmenus: {
         type: Object
     }
 })
@@ -15,7 +15,7 @@ const props = defineProps({
     <BoardLayout>
         <GContentPanel>
             <div class="flex m-0 p-0">
-                <SettingMenu :menus="menus"/>
+                <SettingMenu :topmenus="topmenus"/>
             </div>
         </GContentPanel>
     </BoardLayout>

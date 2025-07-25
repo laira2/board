@@ -15,11 +15,11 @@ class SettingsController extends Controller
         
     }
     public function index() {
-        $topmenus =$this ->topMenuService -> joinUrl();
+        $topmenus =$this ->topMenuService -> getAllTopmenu();
 
         return Inertia::render('Settings/Index',[
-            'menus' => $topmenus,
+            'topmenus' => $topmenus,
         ]);
-    }
+    } 
 
 }
