@@ -3,7 +3,6 @@
         <Tabs value="0">
             <TabList>
                 <Tab value="0">Menu 관리</Tab>
-                <Tab value="1">관리</Tab>
             </TabList>
             <TabPanels>
                 <TabPanel value="0">

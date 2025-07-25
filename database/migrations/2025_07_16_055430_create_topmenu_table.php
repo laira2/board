@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,6 +20,12 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        DB::table('topmenu')->insert([
+            ['code'=>'home', 'name'=>'home','description'=>'메인화면. 게시글 조회'],
+            ['code'=>'board_post', 'name'=>'Post','description'=>'게시글 작성'],
+            ['code'=>'settings', 'name'=>'settings','description'=>'관리 페이지'],
+        ]);
     }
 
     /**
