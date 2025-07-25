@@ -18,32 +18,19 @@ class TopMenuController extends Controller
     {
         
     }
-    //
-    public function handle ($code)
-    {
-        try{
-            $menu = TopMenu::whereCode($code)
-                            ->first();
-            $url = Url::whereTopmenuCode($menu['code'])
-                        ->first();
-                        
-            return Inertia::render($url);
-
-        }catch(Exception $e){
-
-        }
-        
-        
-    }
-
+    /**
+     * Topmenu 생성
+     */
     public function store (Request $request)
     {
         Log::debug("topmenu store 시작");
         $this -> topMenuService -> createMenu($request);
-        // $topmenus =$this ->topMenuService -> getAllTopmenu();
         return Inertia::location("/settings");
     }
-    
+
+    /**
+     * Topmenu 수정
+     */
     public function update (Request $request, $id)
     {
         $this -> topMenuService -> updateMenu($id, $request);
@@ -51,6 +38,9 @@ class TopMenuController extends Controller
 
     }
 
+    /**
+     * Topmenu 삭제
+     */
     public function destroy($id)
     {
         $this -> topMenuService -> deleteMenu($id);

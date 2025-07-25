@@ -7,7 +7,7 @@
                         <h1>{{ board.title}}</h1>
                         <div>
                             <Link :href="`/menu/board/post/${board.id}`">
-                                <Button label="수정" class="w-15" /> 
+                                <Button label="수정" class="w-15 mr-1.5" /> 
                             </Link>
                             <Link :href="`/board/delete/${board.id}`" method="delete" >
                                 <Button label="삭제" severity="secondary" outlined class="w-15" /> 
@@ -39,7 +39,7 @@
                             <Button type="button" label="댓글" variant="text" :badge="comments?.length || 0" @click="toggleComments" />
                         </div>
                         <Link :href="`/`" >
-                            <Button label="목록" severity="secondary" outlined class="w-15" /> 
+                            <Button label="목록" severity="secondary" outlined class="w-15 ml-1" /> 
                         </Link> 
                     </div>
                 </template>
@@ -76,6 +76,5 @@ const boardCardClass = computed(() => {
         ? 'w-2/3 transition-all duration-300 ease-in-out' 
         : 'w-full transition-all duration-300 ease-in-out';
 });
-
 
 </script>

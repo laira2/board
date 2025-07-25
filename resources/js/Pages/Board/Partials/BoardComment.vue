@@ -33,10 +33,4 @@ const props = defineProps({
 }); 
 const showComments = ref(false)
 
-const toggleComments = () => {
-  showComments.value = !showComments.value
-}
-
-
-
 </script>
