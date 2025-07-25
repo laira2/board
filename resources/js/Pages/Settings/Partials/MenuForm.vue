@@ -1,23 +1,25 @@
 <template>
-    
-    <div >
-        <Form v-slot="$menuForm" @submit="onFormSubmit" class="flex mt-3" >
-            <label name="code" value="code" class="w-20 flex items-center text-center pr-0 mr-0">코드</label>
-            <InputText type="text" v-model="menuForm.code" placeholder="code" class="ml-0 mr-3.5" style="width: 20%"/>
-            <label name="name" value="name" class="w-20 flex items-center">이름</label>
-            <InputText type="text" v-model="menuForm.name" class="ml-0 mr-3.5" style="width: 25%"/>
-            <label name="description" value="description" class="w-20 flex items-center">설명</label>
-            <InputText type="text" v-model="menuForm.description" class="ml-0 mr-3.5" style="width: 35%"/>
-            <label name="url" value="url" class="w-20 flex items-center">URL</label>
-            <InputText type="text" v-model="menuForm.url" class="ml-0 mr-3.5" style="width: 10%"/>
-            <Button type="submit" severity="secondary" label="등록" style="width: 10%" />
-            <div v-if="props.menu!=null">
-                <Link :href="`/menu/delete/${menu.id}`" method="delete" as="button" class="items-end">
-                    <Button type="button" label="Danger" severity="danger" variant="text">삭제</Button>
-                </Link>
+    <div>
+        <Form v-slot="$menuForm" @submit="onFormSubmit" class=" mt-3">
+            <div class="flex">
+                <label name="code" value="code" class="w-11 flex items-center text-center pr-0 mr-0">코드</label>
+                <InputText type="text" v-model="menuForm.code" placeholder="code" class="ml-0 mr-2" style="width: 20%"/>
+                <label name="name" value="name" class="w-11 flex items-center">이름</label>
+                <InputText type="text" v-model="menuForm.name" class="ml-0 mr-2" style="width: 20%"/>
+                <label name="description" value="description" class="w-11 flex items-center">설명</label>
+                <InputText type="text" v-model="menuForm.description" class="ml-0 mr-2" style="width: 35%"/>
+                <label name="url" value="url" class="w-11 flex items-center">URL</label>
+                <InputText type="text" v-model="menuForm.url" class="ml-0 mr-2" style="width: 25%"/>  
             </div>
-            
-        </Form>        
+            <div class="flex justify-end mt-3">
+                <Button type="submit" label="등록" class="w-20 m-1" />
+                <div v-if="props.menu!=null">
+                    <Link :href="`/menu/delete/${menu.id}`" method="delete" as="button"  >
+                        <Button type="button" label="Danger" :disabled="isCustomMenu(menu.name)" severity="danger" class="w-20 m-1" >삭제</Button>
+                    </Link>
+                </div>  
+            </div>       
+        </Form> 
     </div>
     
 </template>
@@ -29,13 +31,18 @@ const props = defineProps({
         type: Object,
     }
 })
-console.log(props.menu)
+
+const isCustomMenu = (name) => {
+    return ['home', 'Post', 'settings'].includes(name);
+}
+
 const menuForm = useForm({
     code:'',
     name:'',
     description:'',
     url: ''
 });
+
 if(props.menu!=null){
     menuForm.code = props.menu.code
     menuForm.name = props.menu.name

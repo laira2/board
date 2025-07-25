@@ -7,6 +7,7 @@ use App\Models\Url;
 use App\Services\TopMenuService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class TopMenuController extends Controller
@@ -37,6 +38,7 @@ class TopMenuController extends Controller
 
     public function store (Request $request)
     {
+        Log::debug("topmenu store 시작");
         $this -> topMenuService -> createMenu($request);
         // $topmenus =$this ->topMenuService -> getAllTopmenu();
         return Inertia::location("/settings");
