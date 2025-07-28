@@ -11,20 +11,26 @@
                 <label name="url" value="url" class="w-11 flex items-center">URL</label>
                 <InputText type="text" v-model="menuForm.url" class="ml-0 mr-2" style="width: 25%"/>  
             </div>
-            <div class="flex justify-end mt-3">
-                <Button type="submit" label="등록" class="w-20 m-1" />
-                <div v-if="props.menu!=null">
+            <div class="flex justify-between mt-3">
+                <div v-if="props.menu!=null" class>    
                     <Link :href="`/menu/delete/${menu.id}`" method="delete" as="button"  >
                         <Button type="button" label="Danger" :disabled="isCustomMenu(menu.name)" severity="danger" class="w-20 m-1" >삭제</Button>
                     </Link>
-                </div>  
+                    <Checkbox 
+                        class="w-20 m-1" 
+                        :disabled="isCustomMenu(menu.name)" 
+                        v-tooltip="{value:'선택 시 상단 메뉴에 등록됩니다.',class:'tooltip.max.width'}" 
+                        size="large" 
+                        v-model="menuForm.is_activate" binary />
+                </div>                  
+                <Button type="submit" label="등록" class="w-20 m-1" />
             </div>       
         </Form> 
     </div>
-    
 </template>
 <script setup>
 import { useForm,Link } from '@inertiajs/vue3';
+import Checkbox from 'primevue/checkbox';
 
 const props = defineProps({
     menu:{
@@ -40,7 +46,8 @@ const menuForm = useForm({
     code:'',
     name:'',
     description:'',
-    url: ''
+    url: '',
+    is_activate: false
 });
 
 if(props.menu!=null){
@@ -48,6 +55,9 @@ if(props.menu!=null){
     menuForm.name = props.menu.name
     menuForm.description = props.menu.description
     menuForm.url = props.menu.url
+    if (props.menu.is_activate== true){
+        menuForm.is_activate = props.menu.is_activate === true;
+    } 
 
 }
 const onFormSubmit = ()=>{

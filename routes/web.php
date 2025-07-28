@@ -19,6 +19,10 @@ Route::delete('/board/delete/{id}', [BoardController::class, 'destroy']);
 
 Route::delete('/menu/delete/{id}', [TopMenuController::class, 'destroy']);
 
+Route::get('/board/search',[BoardController::class, 'search']);
+
+Route::get('/menu/search',[TopMenuController::class, 'search']);
+
 Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.show');
 
 Route::get('/menu/settings', [SettingsController::class, 'index']);

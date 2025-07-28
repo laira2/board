@@ -7,7 +7,7 @@
                         <h1>{{ board.title}}</h1>
                         <div>
                             <Link :href="`/menu/board/post/${board.id}`">
-                                <Button label="수정" class="w-15" /> 
+                                <Button label="수정" class="w-15 mr-1.5" /> 
                             </Link>
                             <Link :href="`/board/delete/${board.id}`" method="delete" >
                                 <Button label="삭제" severity="secondary" outlined class="w-15" /> 
@@ -17,21 +17,15 @@
                     </template> 
                 <template #subtitle>
                     <div class="flex justify-between mr-4 ml-4">
-                        <p>
-                            작성자: {{ board.author }}
-                        </p>    
-                        <p>
-                            작성일: {{ board.created_at }}
-                        </p>                
+                        <p>작성자: {{ board.author }}</p>    
+                        <p>작성일: {{ board.created_at }}</p>                
                     </div>
                     <Divider />
                 </template>
                 <template #content class="h ">
-                    
                     <div class="h-100 m-4">
                         <p class="m-0">{{ board.content }}</p>  
                     </div>
-                    
                 </template>
                 <template #footer>
                     <div class="flex justify-end gap-4 mt-1">
@@ -39,7 +33,7 @@
                             <Button type="button" label="댓글" variant="text" :badge="comments?.length || 0" @click="toggleComments" />
                         </div>
                         <Link :href="`/`" >
-                            <Button label="목록" severity="secondary" outlined class="w-15" /> 
+                            <Button label="목록" severity="secondary" outlined class="w-15 ml-1" /> 
                         </Link> 
                     </div>
                 </template>
@@ -76,6 +70,5 @@ const boardCardClass = computed(() => {
         ? 'w-2/3 transition-all duration-300 ease-in-out' 
         : 'w-full transition-all duration-300 ease-in-out';
 });
-
 
 </script>

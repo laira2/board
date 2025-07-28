@@ -1,6 +1,7 @@
-<template >
+<template>
     <BoardLayout :menus="menus">
         <GContentPanel>
+            <SearchForm formtype="board"/>
             <div class="w-full">
                 <DataTable :value="boards.data" tableStyle="min-width: 50rem" >
                     <Column field="id" header="ID" style="width: 15%"></Column>
@@ -37,6 +38,7 @@ import Column from 'primevue/column';
 import Paginator from 'primevue/paginator';
 import BoardLayout from '../Layouts/BoardLayout.vue';
 import GContentPanel from '../components/GContentPanel.vue';
+import SearchForm from '../components/ui/SearchForm.vue';
 
 const props = defineProps({
     boards: {
@@ -46,7 +48,7 @@ const props = defineProps({
         type: Object
     }
 });
-
+console.log(props.boards)
 function onPageChange(event) {
   const page = event.page + 1 
   const perPage = event.rows

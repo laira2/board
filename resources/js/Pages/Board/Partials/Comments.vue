@@ -15,9 +15,8 @@
             <div class="ml-2 mt-2 p-1">
                 <Button @click="toggleCommentForm(comment.id)" variant="text" label="댓글쓰기" severity="secondary"></Button>
                 <Button @click="toggleReply(comment.id)" v-if="comment.all_children?.length!=0" variant="text" label="대댓글 보기" :badge="comment.all_children?.length || 0" severity="secondary"></Button>
-                
             </div>
-            <CardFooter class="m-0.5 m-0.5  ">
+            <CardFooter class="m-0.5">
                 <CommentForm 
                     v-show="openedCommentId === comment.id"
                     :board-id="boardId" 

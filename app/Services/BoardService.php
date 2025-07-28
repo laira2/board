@@ -7,6 +7,7 @@ use App\Http\Resources\BoardResource;
 use App\Models\Board;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BoardService
 {
@@ -17,6 +18,7 @@ class BoardService
     {
         //
     }
+    
     /**
      * 전체 게시글 조회 (페이지네이션 적용)
      */
@@ -83,6 +85,16 @@ class BoardService
     {
         $board = Board::find($id);
         $board ->delete();
+    }
 
+    public function searchBaord($search_key){
+
+        $board = Board::query()
+                        ->where('title','like',"%$search_key%")
+                        -> orWhere('author','like',"%$search_key%")
+                        ->orderBy('id', 'desc')
+                        ->paginate(10);     
+        Log::debug('board'.$board);
+        return $board;
     }
 }
