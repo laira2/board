@@ -1,6 +1,7 @@
 <template>
     <div class="card w-full">
         <div>
+            <SearchForm formtype="menu" />
             <DataTable :value="topmenus" tableStyle="min-width: 50rem">
                 <Column field="id" header="Id" style="width: 10%"></Column>
                 <Column field="code" header="Code" style="width: 15%"></Column>
@@ -28,6 +29,7 @@
     </div>
 </template>
 <script setup>
+import SearchForm from '@/Pages/components/ui/SearchForm.vue';
 import MenuForm from './MenuForm.vue';
 import Drawer from 'primevue/drawer';
 import { ref } from "vue";
@@ -42,6 +44,7 @@ const visibleRegister = ref(false);
 const visibleUpdate = ref(false);
 const selectedMenu = ref(null);
 
+console.log("topmenu 값",props.topmenus)
 const updateButton = (menu) => 
 {   
     selectedMenu.value = menu;

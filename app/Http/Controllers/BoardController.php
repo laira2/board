@@ -111,6 +111,7 @@ class BoardController extends Controller
 
         $keyword = $request-> input('search_key');
         $result = $this -> boardService -> searchBaord($keyword);
+        Log::debug('result'.$result);
         return Inertia::render('Board/Index',[
             'boards' => $result,
         ]);

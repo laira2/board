@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\TopMenu;
 use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TopMenuService
 {
@@ -87,4 +88,13 @@ class TopMenuService
         $topmenu -> delete();
 
     }
+
+    public function searchMenu($search_key)
+    {
+        $searchedmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
+                                ->where('topmenu.name','like',"%$search_key%")
+                                -> orWhere('topmenu.code','like',"%$search_key%") ->get();     
+        return $searchedmenus;
+    }
+
 }

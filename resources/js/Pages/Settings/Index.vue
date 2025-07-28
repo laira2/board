@@ -26,7 +26,7 @@ const props = defineProps({
                     </TabList>
                     <TabPanels>
                         <TabPanel value="0">
-                            <SettingMenu :topmenus="topmenus"/>
+                            <SettingMenu :topmenus="topmenus" />
                         </TabPanel>
                     </TabPanels>
                 </Tabs>                

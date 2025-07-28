@@ -1,7 +1,7 @@
 <template>
     <BoardLayout :menus="menus">
         <GContentPanel>
-            <SearchForm />
+            <SearchForm formtype="board"/>
             <div class="w-full">
                 <DataTable :value="boards.data" tableStyle="min-width: 50rem" >
                     <Column field="id" header="ID" style="width: 15%"></Column>
