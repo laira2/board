@@ -29,8 +29,7 @@ const props = defineProps({
                             <SettingMenu :topmenus="topmenus"/>
                         </TabPanel>
                     </TabPanels>
-                </Tabs>
-                
+                </Tabs>                
             </div>
         </GContentPanel>
     </BoardLayout>

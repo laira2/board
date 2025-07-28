@@ -3,13 +3,13 @@
         <div>
             <DataTable :value="topmenus" tableStyle="min-width: 50rem">
                 <Column field="id" header="Id" style="width: 10%"></Column>
-                <Column field="code" header="Code" style="width: 20%"></Column>
-                <Column field="name" header="Name" style="width: 20%"></Column>
+                <Column field="code" header="Code" style="width: 15%"></Column>
+                <Column field="name" header="Name" style="width: 15%"></Column>
                 <Column field="url" header="Url" style="width: 20%"></Column>
                 <Column field="description" header="Decription" style="width: 35%"></Column>
                 <Column  style="width: 15%">
                     <template #header>
-                        <Button @click="visibleRegister = true" >
+                        <Button @click="visibleRegister = true" class="w-25" >
                             메뉴 등록
                         </Button>
                     </template> 

@@ -17,21 +17,15 @@
                     </template> 
                 <template #subtitle>
                     <div class="flex justify-between mr-4 ml-4">
-                        <p>
-                            작성자: {{ board.author }}
-                        </p>    
-                        <p>
-                            작성일: {{ board.created_at }}
-                        </p>                
+                        <p>작성자: {{ board.author }}</p>    
+                        <p>작성일: {{ board.created_at }}</p>                
                     </div>
                     <Divider />
                 </template>
                 <template #content class="h ">
-                    
                     <div class="h-100 m-4">
                         <p class="m-0">{{ board.content }}</p>  
                     </div>
-                    
                 </template>
                 <template #footer>
                     <div class="flex justify-end gap-4 mt-1">

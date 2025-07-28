@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use App\Services\BoardService;
 use App\Services\CommentService;
 use App\Services\TopMenuService;
+use Illuminate\Support\Facades\Log;
 
 class BoardController extends Controller
 {
@@ -89,8 +90,6 @@ class BoardController extends Controller
 
     public function update($id, BoardRequest $request){
         try{
-            
-            
             $updated_board = $this -> boardService ->updateBoard($id, $request);
             
             return Inertia::render('Board/BoardContent',[
@@ -106,5 +105,14 @@ class BoardController extends Controller
         $this -> boardService -> deleteBoard($id);
 
         return Inertia::location("/");
+    }
+
+    public function search(Request $request){
+
+        $keyword = $request-> input('search_key');
+        $result = $this -> boardService -> searchBaord($keyword);
+        return Inertia::render('Board/Index',[
+            'boards' => $result,
+        ]);
     }
 }
