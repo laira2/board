@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\TopMenuService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SettingsController extends Controller
@@ -13,8 +14,9 @@ class SettingsController extends Controller
     {
         
     }
-    public function index() {
-        $topmenus =$this ->topMenuService -> getAllTopmenu();
+    public function index(Request $request) {
+        
+        $topmenus =$this ->topMenuService -> getAllTopmenu($request);
 
         return Inertia::render('Settings/Index',[
             'topmenus' => $topmenus,
