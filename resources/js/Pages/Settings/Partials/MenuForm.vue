@@ -19,7 +19,7 @@
                     <Checkbox 
                         class="w-20 m-1" 
                         :disabled="isCustomMenu(menu.name)" 
-                        v-tooltip="{value:'선택 시 상단 메뉴에 등록됩니다.',class:'tooltip.max.width'}" 
+                        v-tooltip="{value:'선택 시 상단 메뉴바에 추가됩니다.',class:'tooltip.max.width'}" 
                         size="large" 
                         v-model="menuForm.is_activate" binary />
                 </div>                  
@@ -58,7 +58,6 @@ if(props.menu!=null){
     if (props.menu.is_activate== true){
         menuForm.is_activate = props.menu.is_activate === true;
     } 
-
 }
 const onFormSubmit = ()=>{
     if(props.menu!=null){
@@ -66,6 +65,5 @@ const onFormSubmit = ()=>{
     }else{
         menuForm.post('/menu/post');
     }   
-
 }
 </script>

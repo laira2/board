@@ -4,6 +4,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TopMenuController;
+use App\Http\Middleware\LogSearchHistory;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/menu/home', [BoardController::class, 'index'])->name('home.index');
@@ -19,9 +20,9 @@ Route::delete('/board/delete/{id}', [BoardController::class, 'destroy']);
 
 Route::delete('/menu/delete/{id}', [TopMenuController::class, 'destroy']);
 
-Route::get('/board/search',[BoardController::class, 'search']);
+Route::get('/board/search',[BoardController::class, 'search'])->middleware(LogSearchHistory::class);
 
-Route::get('/menu/search',[TopMenuController::class, 'search']);
+Route::get('/menu/search',[TopMenuController::class, 'search'])->middleware(LogSearchHistory::class);;
 
 Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.show');
 
