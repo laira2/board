@@ -1,8 +1,12 @@
 <template>
-    <Panel class="w-full m-0 p-0 items-center ">
-        <slot>
-        </slot>
-    </Panel>
+    <Card class="p-1 m-1" >
+        <template #content class="p-1 m-1">
+            <slot />
+        </template>
+    </Card>
 </template>
 <script setup>
+
+import Card from 'primevue/card';
+
 </script>

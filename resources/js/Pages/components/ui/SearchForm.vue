@@ -15,7 +15,8 @@ const onFormSubmit= ( )=>{
         search_key: searchForm.search_key
     })
 }
-</script>   
+</script>
+   
 <template>
     <div class="flex items-end gap-2">
         <Form v-slot="$searchForm" @submit="onFormSubmit" class=" mt-3">

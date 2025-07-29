@@ -99,7 +99,8 @@ class TopMenuService
     {
         $searchedmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
                                 ->where('topmenu.name','like',"%$search_key%")
-                                -> orWhere('topmenu.code','like',"%$search_key%") ->get();     
+                                ->orWhere('topmenu.code','like',"%$search_key%")
+                                ->paginate(10);     
         return $searchedmenus;
     }
 

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('history', function (Blueprint $table) {
             $table->id();
             $table->string('table_name');
-            $table->integer('record_id');
-            $table->enum('action', ['created', 'updated', 'deleted']);
+            $table->integer('record_id')->nullable();
+            $table->enum('action', ['created', 'updated', 'deleted','searched', 'viewed']);
             $table->json('old_data')->nullable();
             $table->json('new_data')->nullable(); 
             $table->timestamps();
