@@ -55,7 +55,7 @@ class TopMenuController extends Controller
         $menus = $this -> topMenuService -> searchMenu($keyword);
         Log::debug("menus".$menus);
         return Inertia::render('Settings/Index',[
-            'topmenus' => $menus,
+            'topmenus' => $menus
         ]);
     }
 }

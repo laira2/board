@@ -48,11 +48,11 @@ const props = defineProps({
         type: Object
     }
 });
-console.log(props.boards)
-function onPageChange(event) {
-  const page = event.page + 1 
-  const perPage = event.rows
-  router.get(`/?page=${page}&per_page=${perPage}`)
+
+const onPageChange = (event) => {
+    const page = event.page + 1
+    const perPage = event.rows
+    router.get(`/?page=${page}&per_page=${perPage}`)
 }
 
 </script>

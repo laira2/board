@@ -12,10 +12,16 @@ class TopMenuService
     /**
      * 전체 메뉴 조회
      */
-    public function getAllTopmenu(){
+    public function getAllTopmenu(Request $request){
+        $perPage = $request ->input('per_page' ,10);
+        
+        Log::debug("pagination 적용 perPage 전체 조회".$perPage);
+
         $topmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
                 ->select('topmenu.*', 'url.url')
-                ->get();
+                ->paginate($perPage);
+                
+        Log::debug("pagination 적용 topmenu 전체 조회".$topmenus);
         return $topmenus;
     }
 
