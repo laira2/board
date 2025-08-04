@@ -24,12 +24,6 @@
     import TopMenu from "../components/ui/TopMenu.vue";
     import Footer from "../components/ui/Footer.vue";
 
-    // const props = defineProps({
-    //     menus:{
-    //         type: Object
-    //     }
-    // })
     const page = usePage();
-    console.log("boardlayout");
-    // console.log(props);
+    
     </script>
