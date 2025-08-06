@@ -37,3 +37,5 @@ Route::get('/settings',[SettingsController::class,'index'])->name('settings.inde
 Route::post('/menu/post', [TopMenuController::class, 'store']);
 
 Route::put('/menu/{id}',[TopMenuController::class, 'update']);
+
+Route::inertia('/auth/login', 'Auth/Index');
