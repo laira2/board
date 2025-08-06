@@ -38,4 +38,9 @@ Route::post('/menu/post', [TopMenuController::class, 'store']);
 
 Route::put('/menu/{id}',[TopMenuController::class, 'update']);
 
-Route::inertia('/auth/login', 'Auth/Index');
+Route::inertia('/auth/login', 'Auth/Index',[
+    'is_login' => 'true'
+]);
+Route::inertia('/auth/register', 'Auth/Index',[
+    'is_login' => 'false'
+]);

@@ -2,8 +2,11 @@
     <Card class="w-full h-full">
         <template #title>Board</template>
         <template #content>
-            <div class="card flex justify-center">
-                <LoginForm />
+            <div v-if="is_login==='true'" class="card flex justify-center">
+                <LoginForm  />
+            </div>
+            <div v-if="is_login==='false'" class="card flex justify-center">
+                <Register  />
             </div>
         </template>
     </Card>
@@ -11,6 +14,11 @@
 
 <script setup>
 import LoginForm from './LoginForm.vue';
+import Register from './Register.vue';
 
-
+const props = defineProps({
+    is_login : {
+        type: Boolean
+    }
+})
 </script>
