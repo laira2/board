@@ -25,8 +25,6 @@ class AppServiceProvider extends ServiceProvider
         'menus' => function () {
             return app(\App\Services\TopMenuService::class)->joinUrl();
             },
-        ]);
-        Log::debug("boot() 실행");
-        
+        ]);        
     }
 }

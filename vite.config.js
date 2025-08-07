@@ -19,6 +19,10 @@ export default defineConfig({
         ]
     })
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 5174
+    },
     resolve: name => {
         const pages = import.meta.glob('./resources/js/Pages/**/*.vue', { eager: true })
         return pages[`./resources/js/Pages/${name}.vue`]

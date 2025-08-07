@@ -18,6 +18,7 @@ const onFormSubmit= ( )=>{
 </script>
    
 <template>
+    
     <div class="flex items-end gap-2">
         <Form v-slot="$searchForm" @submit="onFormSubmit" class=" mt-3">
             <FloatLabel variant="on">
