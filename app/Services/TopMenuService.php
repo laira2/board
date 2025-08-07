@@ -45,6 +45,9 @@ class TopMenuService
 
     }
 
+    /**
+     * 메뉴 생성
+     */
     public function createMenu(Request $request)
     {
         $new_menu = TopMenu::create([
@@ -61,6 +64,9 @@ class TopMenuService
         return $new_menu;
     }
 
+    /**
+     * 메뉴 수정
+     */
     public function updateMenu($id, Request $request)
     {
          $validated = $request->validate([
@@ -87,6 +93,9 @@ class TopMenuService
         }
     }
 
+    /**
+     * 메뉴 삭제
+     */
     public function deleteMenu($id)
     {
         $topmenu = TopMenu::find($id);
@@ -94,7 +103,10 @@ class TopMenuService
         $topmenu -> delete();
 
     }
-
+    
+    /**
+     * 메뉴 검색
+     */
     public function searchMenu($search_key)
     {
         $searchedmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')

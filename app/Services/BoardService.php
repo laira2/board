@@ -87,6 +87,9 @@ class BoardService
         $board ->delete();
     }
 
+    /**
+     * 게시글 검색
+     */
     public function searchBaord($search_key){
 
         $board = Board::query()

@@ -1,37 +1,35 @@
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3';
 
-const loginForm = useForm({
+const registerForm = useForm({
     email: '',
     name: '',
     password: ''
 })
 
-// 유효성 검사 함수
 const validateForm = () => {
     let isValid = true;
+
+    registerForm.clearErrors();
     
-    // 에러 초기화
-    loginForm.clearErrors();
-    
-    if (!loginForm.email) {
-        loginForm.setError('email', '이메일을 입력해주세요.');
+    if (!registerForm.email) {
+        registerForm.setError('email', '이메일을 입력해주세요.');
         isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(loginForm.email)) {
-        loginForm.setError('email', '올바른 이메일 형식이 아닙니다.');
+    } else if (!/\S+@\S+\.\S+/.test(registerForm.email)) {
+        registerForm.setError('email', '올바른 이메일 형식이 아닙니다.');
         isValid = false;
     }
     
-    if(!loginForm.name) {
-        loginForm.setError('name','이름을 입력해주세요');
+    if(!registerForm.name) {
+        registerForm.setError('name','이름을 입력해주세요');
         isValid=false;
     }
     
-    if (!loginForm.password) {
-        loginForm.setError('password', '비밀번호를 입력해주세요.');
+    if (!registerForm.password) {
+        registerForm.setError('password', '비밀번호를 입력해주세요.');
         isValid = false;
-    } else if (loginForm.password.length < 6) {
-        loginForm.setError('password', '비밀번호는 6자 이상이어야 합니다.');
+    } else if (registerForm.password.length < 6) {
+        registerForm.setError('password', '비밀번호는 6자 이상이어야 합니다.');
         isValid = false;
     }
     
@@ -40,14 +38,15 @@ const validateForm = () => {
 
 const onFormSubmit = () => {
     if (validateForm()) {
-        loginForm.post('/auth/register');
+        console.log("register post 실행")
+        registerForm.post('/register');
     }
 }
 </script>
 
 <template>
     <Panel header="회원 가입">
-        <Form @submit="onFormSubmit" class="flex flex-col gap-4 w-full sm:w-56 mt-2">
+        <Form v-slot="$registerForm" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full sm:w-56 mt-2">
             <div class="flex flex-col mt-3">
                 <FloatLabel>
                     <label>이메일</label>
@@ -55,16 +54,16 @@ const onFormSubmit = () => {
                         name="email" 
                         type="text" 
                         fluid 
-                        v-model="loginForm.email"
-                        :class="{ 'p-invalid': loginForm.errors.email }"
+                        v-model="registerForm.email"
+                        :class="{ 'p-invalid': registerForm.errors.email }"
                     />
                     <Message 
-                        v-if="loginForm.errors.email" 
+                        v-if="registerForm.errors.email" 
                         severity="error" 
                         size="small" 
                         variant="simple"
                     >
-                        {{ loginForm.errors.email }}
+                        {{ registerForm.errors.email }}
                     </Message>
                 </FloatLabel>
             </div>
@@ -75,16 +74,16 @@ const onFormSubmit = () => {
                         name="name" 
                         type="text" 
                         fluid 
-                        v-model="loginForm.name"
-                        :class="{ 'p-invalid': loginForm.errors.name }"
+                        v-model="registerForm.name"
+                        :class="{ 'p-invalid': registerForm.errors.name }"
                     />
                     <Message 
-                        v-if="loginForm.errors.name" 
+                        v-if="registerForm.errors.name" 
                         severity="error" 
                         size="small" 
                         variant="simple"
                     >
-                        {{ loginForm.errors.name }}
+                        {{ registerForm.errors.name }}
                     </Message>
                 </FloatLabel>
             </div>
@@ -95,16 +94,16 @@ const onFormSubmit = () => {
                         name="password" 
                         type="password" 
                         fluid 
-                        v-model="loginForm.password"
-                        :class="{ 'p-invalid': loginForm.errors.password }"
+                        v-model="registerForm.password"
+                        :class="{ 'p-invalid': registerForm.errors.password }"
                     />
                     <Message 
-                        v-if="loginForm.errors.password" 
+                        v-if="registerForm.errors.password" 
                         severity="error" 
                         size="small" 
                         variant="simple"
                     >
-                        {{ loginForm.errors.password }}
+                        {{ registerForm.errors.password }}
                     </Message>
                 </FloatLabel>   
             </div>
@@ -114,12 +113,7 @@ const onFormSubmit = () => {
                         로그인
                     </Link>
                 </div>
-                <Button 
-                    type="submit" 
-                    severity="secondary" 
-                    label="Submit" 
-                    :loading="loginForm.processing"
-                />    
+                <Button type="submit" severity="secondary" label="등록"/>
             </div>
         </Form>
     </Panel>    

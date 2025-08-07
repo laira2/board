@@ -6,11 +6,9 @@ const loginForm = useForm({
     password: ''
 })
 
-// 유효성 검사 함수
 const validateForm = () => {
     let isValid = true;
-    
-    // 에러 초기화
+
     loginForm.clearErrors();
     
     if (!loginForm.email) {
@@ -24,10 +22,7 @@ const validateForm = () => {
     if (!loginForm.password) {
         loginForm.setError('password', '비밀번호를 입력해주세요.');
         isValid = false;
-    } else if (loginForm.password.length < 6) {
-        loginForm.setError('password', '비밀번호는 6자 이상이어야 합니다.');
-        isValid = false;
-    }
+    } 
     
     return isValid;
 }
@@ -42,7 +37,14 @@ const onFormSubmit = () => {
 <template>
     <Panel header="로그인">
         <Form @submit="onFormSubmit" class="flex flex-col gap-4 w-full sm:w-56 mt-2">
-            <div class="flex flex-col mt-3">
+            <Message
+                    v-if="loginForm.errors.login_error"
+                    severity="error"
+                    size="small"
+                    variant="outlined">
+                    {{  loginForm.errors.login_error }}
+                </Message>
+            <div class="flex flex-col mt-3">                
                 <FloatLabel>
                     <label>이메일</label>
                     <InputText 

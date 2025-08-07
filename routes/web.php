@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TopMenuController;
 use App\Http\Middleware\LogSearchHistory;
@@ -44,3 +46,7 @@ Route::inertia('/auth/login', 'Auth/Index',[
 Route::inertia('/auth/register', 'Auth/Index',[
     'is_login' => 'false'
 ]);
+
+Route::post('/register',[RegisterController::class, 'store']);
+
+Route::post('/auth/login',[LoginController::class, 'login']);
