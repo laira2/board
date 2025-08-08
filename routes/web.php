@@ -50,3 +50,5 @@ Route::inertia('/auth/register', 'Auth/Index',[
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::post('/auth/login',[LoginController::class, 'login']);
+
+Route::post('/auth/logout',[LoginController::class,'logout']);

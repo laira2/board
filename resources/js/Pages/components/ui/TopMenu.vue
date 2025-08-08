@@ -23,15 +23,23 @@
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent side="bottom"  class="w-30 right-0">
-                            <Link :href="/auth/logout">
-                                Logout
-                            </Link>
-                            <Link>
-                                Profile
-                            </Link>
+                            <div class="grid gap-4">
+                                <div class="grid gap-2">
+                                    <div class="grid grid-cols-3 items-center gap-4">
+                                        <!-- TODO: 사용자 정보 수정 페이지 추가 -->
+                                        <Link>
+                                            Profile
+                                        </Link>
+                                    </div>
+                                    <div class="grid grid-cols-3 items-center gap-4">
+                                        <Button variant="link" class="ml-2" @click="logout">
+                                            Logout
+                                        </Button>
+                                    </div>  
+                                </div>
+                            </div>                           
                         </PopoverContent>
-                    </Popover>
-                    
+                    </Popover>                    
                 </div>
             </div>
         </nav>
@@ -39,10 +47,8 @@
 </template>
 
 <script setup>
-import { Link, usePage, } from '@inertiajs/vue3';
+import { Link, usePage, router } from '@inertiajs/vue3';
 import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input"
-import { Label } from "@/Components/ui/label"
 import {
   Popover,
   PopoverContent,
@@ -56,4 +62,14 @@ const props = defineProps({
 });
 const page =usePage();
 
+const logout = () => {
+    router.post('/auth/logout', {}, {
+        onError: (errors) => {
+            console.error('Logout 실패:', errors)
+        },
+        onSuccess: () => {
+            console.log('Logout 성공')
+        }
+    })
+}
 </script>
