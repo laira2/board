@@ -17,6 +17,11 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.18",
+        "@fullcalendar/daygrid": "^6.1.18",
+        "@fullcalendar/interaction": "^6.1.18",
+        "@fullcalendar/timegrid": "^6.1.18",
+        "@fullcalendar/vue3": "^6.1.18",
         "@inertiajs/vue3": "^2.0.13",
         "@primeuix/themes": "^1.1.2",
         "@primevue/forms": "^4.3.5",

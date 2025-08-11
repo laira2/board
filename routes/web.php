@@ -52,3 +52,5 @@ Route::post('/register',[RegisterController::class, 'store']);
 Route::post('/auth/login',[LoginController::class, 'login']);
 
 Route::post('/auth/logout',[LoginController::class,'logout']);
+
+Route::inertia('/calendar', 'Calendar/Index');
