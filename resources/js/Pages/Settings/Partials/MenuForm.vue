@@ -29,7 +29,7 @@
     </div>
 </template>
 <script setup>
-import { useForm,Link } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 import Checkbox from 'primevue/checkbox';
 
 const props = defineProps({

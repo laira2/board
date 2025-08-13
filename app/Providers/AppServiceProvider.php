@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
         'menus' => function () {
             return app(\App\Services\TopMenuService::class)->joinUrl();
             },
+        'auth' => fn () => [
+            'user' => Auth::user(),
+        ],
         ]);        
     }
 }

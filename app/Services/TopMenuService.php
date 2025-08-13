@@ -17,8 +17,8 @@ class TopMenuService
         
         Log::debug("pagination 적용 perPage 전체 조회".$perPage);
 
-        $topmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
-                ->select('topmenu.*', 'url.url')
+        $topmenus = Topmenu::leftJoin('urls', 'topmenus.code', '=', 'url.topmenu_code')
+                ->select('topmenus.*', 'urls.url')
                 ->paginate($perPage);
                 
         Log::debug("pagination 적용 topmenu 전체 조회".$topmenus);
@@ -37,9 +37,9 @@ class TopMenuService
      * 메뉴, Url 합친 값
      */
     public function joinUrl(){
-        $menus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
-                ->where('topmenu.is_activate',true)
-                ->select('topmenu.*', 'url.url')
+        $menus = Topmenu::leftJoin('urls', 'topmenus.code', '=', 'urls.topmenu_code')
+                ->where('topmenus.is_activate',true)
+                ->select('topmenus.*', 'urls.url')
                 ->get();
         return $menus;
 
@@ -109,9 +109,9 @@ class TopMenuService
      */
     public function searchMenu($search_key)
     {
-        $searchedmenus = Topmenu::leftJoin('url', 'topmenu.code', '=', 'url.topmenu_code')
-                                ->where('topmenu.name','like',"%$search_key%")
-                                ->orWhere('topmenu.code','like',"%$search_key%")
+        $searchedmenus = Topmenu::leftJoin('urls', 'topmenus.code', '=', 'urls.topmenu_code')
+                                ->where('topmenus.name','like',"%$search_key%")
+                                ->orWhere('topmenus.code','like',"%$search_key%")
                                 ->paginate(10);     
         return $searchedmenus;
     }

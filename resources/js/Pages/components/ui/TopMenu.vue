@@ -12,19 +12,26 @@
                 </Link>
             </div>
             <div>
-                <Link href="/auth/login">
+                <Link v-if="!page.props.auth.user" href="/auth/login">
                     Login
                 </Link>
+                <div v-else>
+                    <Usermenu />
+                </div>
             </div>
         </nav>
     </div>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage, } from '@inertiajs/vue3';
+import Usermenu from './Usermenu.vue';
+
 const props = defineProps({
     menus: {
         type: Object
     }
 });
+const page =usePage();
+
 </script>

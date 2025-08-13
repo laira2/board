@@ -2,15 +2,10 @@
     <BoardLayout>
         <GContentPanel>
             <div class="card flex justify-center w-auto">
-                
                 <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full ">
                     <div class="flex flex-col gap-1 flex-row">
                         <label name="title" value="title" class="w-20 flex items-center">제목</label>
                         <InputText v-model="form.title" name="title" type="text" placeholder="title" fluid />   
-                    </div>
-                    <div class="flex flex-col gap-1 flex-row">
-                        <label name="author" value="author" class="w-20 flex items-center">작성자</label>
-                        <InputText :disabled="isAuthor" v-model="form.author" name="author" type="text" placeholder="author" fluid />
                     </div>
                     <div class="flex flex-col gap-1  ">
                         <label name="content" value="content" class="w-20 flex items-baseline">내용</label>
@@ -26,17 +21,18 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import Textarea from 'primevue/textarea';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
 
 const props = defineProps({
     board : {
         type: Array,
     }
 })
+const page = usePage();
 
 const form = useForm({
     title: '',
-    author: '',
+    author: page.props.auth.user.name,
     content: ''
 });
 
@@ -54,8 +50,10 @@ onMounted(()=>{
 const onFormSubmit = () => {
     if(props.board){
         console.log("form.put 실행");
+        
         form.put(`/board/${props.board.id}`);
     }else{
+        console.log("form 값 :",form)
         form.post('/board/post', {
                 onSuccess: () => {
                 }

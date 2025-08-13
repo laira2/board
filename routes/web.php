@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -50,3 +51,9 @@ Route::inertia('/auth/register', 'Auth/Index',[
 Route::post('/register',[RegisterController::class, 'store']);
 
 Route::post('/auth/login',[LoginController::class, 'login']);
+
+Route::post('/auth/logout',[LoginController::class,'logout']);
+
+Route::get('/calendar', [CalendarController::class, 'index']);
+
+Route::post('/calendar/event/create', [CalendarController::class,'store']);

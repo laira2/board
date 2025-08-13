@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
 class TopMenu extends Model
 {
     //
-    protected $table = 'topmenu';
+    protected $table = 'topmenus';
 
     protected $fillable = ['code', 'name', 'description','is_activate'];
 
