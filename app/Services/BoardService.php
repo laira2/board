@@ -31,6 +31,15 @@ class BoardService
     }
 
     /**
+     * 전체 게시글 조회
+     */
+    public function getBoardList()
+    {
+        $boards = Board::all();
+        return $boards;
+    }
+
+    /**
      * 게시글 단일 조회
      */
     public function getBoard($id)

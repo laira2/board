@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CalendarRequest;
+use App\Services\BoardService;
 use App\Services\CalendarService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +13,8 @@ class CalendarController extends Controller
 {
     //
     public function __construct(
-        protected CalendarService $calendarService
+        protected CalendarService $calendarService,
+        protected BoardService $boardService,
     )
     {
     }
@@ -21,8 +23,11 @@ class CalendarController extends Controller
         $events = $this->calendarService->getEventList(); 
         Log::alert("calendar index 함수");
         Log::alert($events);
+        $boards = $this -> boardService -> getBoardList();
+        Log::debug("boards: ".$boards);
         return Inertia::render('Calendar/Index', [
             'events' => $events,
+            'boards' => $boards,
         ]);
     }
 

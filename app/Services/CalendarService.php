@@ -4,16 +4,13 @@ namespace App\Services;
 
 use App\Http\Requests\CalendarRequest;
 use App\Models\Calendar;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class CalendarService
 {
     public function createEvent(CalendarRequest $calendarRequest)
     {
-        Log::debug("calendar request - startDate: ".$calendarRequest['startDate']);
-        Log::debug("calendar request - startDate: ".$calendarRequest['startDateText']);
-        Log::debug("calendar request - endDate: ".$calendarRequest['endDate']);
-        Log::debug("calendar request - endDate: ".$calendarRequest['endDateText']);
         $new_event = Calendar::create(
             [
                 'title' => $calendarRequest['title'],
@@ -32,13 +29,18 @@ class CalendarService
     {
         Log::debug("getEventList");
         return Calendar::all()->map(function ($event) {
+
+            $endDate = Carbon::parse($event->end_date)->addDay()->format('Y-m-d');
+            
             return [
                 'id' => $event->id,
                 'title' => $event->title,
                 'start' => $event->start_date,
-                'end' => $event->end_date,
+                'end' => $endDate,
                 'type' => $event->type,
                 'author' => $event->regist_user_id,
+                'board_id' => $event->board_id,
+                'allday' => true,
             ];
         });
     }
