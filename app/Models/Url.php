@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 class Url extends Model
 {
     //
-    protected $table = 'url';
+    protected $table = 'urls';
 
     protected $fillable = ['topmenu_code', 'url'];
 

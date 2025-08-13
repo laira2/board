@@ -37,7 +37,7 @@ class Board extends Model
 {
     use SoftDeletes;
     
-    protected $table = 'board';
+    protected $table = 'boards';
 
     protected $fillable = ['title','content','author'];
 }

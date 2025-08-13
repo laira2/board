@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('calendar', function (Blueprint $table) {
+        Schema::create('calendars', function (Blueprint $table) {
             //
             $table->id();
             $table->string('title')->nullable(false);
             $table->foreignId('board_id')->nullable(false)
-                                        ->constrained(
-                                            table:'board', indexName:'id'
-                                        );
+                                        ->constrained('boards');
             $table->foreignId('regist_user_id')->nullable(false)
-                                        ->constrained(
-                                            table:'users', indexName:'id'
-                                        );
+                                        ->constrained('users');
+            $table->dateTime('start_date')->nullable(false);
+            $table->dateTime('end_date')->nullable(false);
+            $table->string('type')->nullable(true);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,8 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('calendar', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('calendars');
     }
 };

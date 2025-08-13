@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('author')->nullable(false);
             $table->text('comment');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('depth')->default(0);
             $table->foreignId('post_id')->nullable(false)
                                         ->constrained(
-                                            table:'board', indexName:'id'
+                                            table:'boards', indexName:'id'
                                         );  
 
             $table->softDeletes();
