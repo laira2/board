@@ -10,10 +10,10 @@ use App\Http\Controllers\TopMenuController;
 use App\Http\Middleware\LogSearchHistory;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/menu/home', [BoardController::class, 'index'])->name('home.index');
+Route::get('/home', [BoardController::class, 'index'])->name('home.index');
 Route::get('/', [BoardController::class, 'index'])->name('home.index');
 
-Route::get('/menu/board/post/{id?}', [BoardController::class, 'createPage']);
+Route::get('/board/post/{id?}', [BoardController::class, 'createPage']);
 
 Route::post('/board/post', [BoardController::class, 'store']);
 
@@ -29,7 +29,7 @@ Route::get('/menu/search',[TopMenuController::class, 'search'])->middleware(LogS
 
 Route::get('/board/{id}', [BoardController::class, 'show'])->name('boardpost.show');
 
-Route::get('/menu/settings', [SettingsController::class, 'index']);
+Route::get('/settings', [SettingsController::class, 'index']);
 
 Route::post('/comment/post',[CommentController::class,'store']);
 

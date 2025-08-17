@@ -28,16 +28,32 @@
       </div>
     </Dialog>
     
-    <Dialog v-model:visible="eventDetailVisible" modal header="일정 정보" :style="{ width: '40rem' }">
+    <Dialog v-model:visible="eventDetailVisible" modal :header="form.title" :style="{ width: '40rem' }">
       <div>
-        <p><strong>제목:</strong> {{ form.title }}</p>
-        <p><strong>시작일:</strong> {{ form.startDateText }}</p>
-        <p><strong>마감일:</strong> {{ form.endDateText }}</p>
-        <p><strong>타입:</strong> {{ form.type }}</p>
-        <p><strong>작성자 ID:</strong> {{ form.author }}</p>
-        <p><strong>게시글 ID:</strong> {{ form.board_id }}</p>
+        <div class="flex justify-between">
+          <p><strong>시작일:</strong> {{ form.startDateText }}</p>
+          <p><strong>마감일:</strong> {{ form.endDateText }}</p>
+          <Tag severity="secondary" :value="form.type"></Tag>
+        </div>
       </div>
-
+        <p><strong>일정 생성자</strong> {{ form.author }}</p>
+        <div v-if="matchedBoard" class="mt-3">
+          <Card>
+            <template #content>
+              <div>
+                <Link
+                  :href="`/board/${form.board_id}`">
+                  <p><strong>{{ matchedBoard.title }}</strong></p>
+                </Link>
+              </div>
+              <p class="flex justify-end">{{ matchedBoard.author }}</p>
+              <Divider></Divider>
+              {{ matchedBoard.content }}
+            </template>
+          </Card>
+          
+          
+        </div>
       <div class="flex justify-end mt-4">
         <Button label="닫기" @click="visible = false" />
       </div>
@@ -47,7 +63,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { useForm, usePage, } from '@inertiajs/vue3';
+import { useForm, usePage, Link } from '@inertiajs/vue3';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -112,11 +128,17 @@ const handleDateSelect = (selectInfo) => {
 
 }
 
+const matchedBoard =ref(null);
 const handleEventClick = (eventClickInfo ) => {
   const event = eventClickInfo.event;
 
   console.log("handleEventClick 실행");
-  console.log(event);
+  console.log("boards: ",page.props.boards);
+  console.log("board_id: ",event.extendedProps.board_id);
+  matchedBoard.value = page.props.boards.find(
+    (board) => board.id === Number(event.extendedProps.board_id)
+  );
+  console.log("matchedBoard: ",matchedBoard);
   eventDetailVisible.value = true;
   isEditing.value = false; 
 
