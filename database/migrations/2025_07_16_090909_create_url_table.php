@@ -23,6 +23,7 @@ return new class extends Migration
         DB::table('urls')->insert([
             ['topmenu_code'=>'home', 'url'=>'home'],
             ['topmenu_code'=>'board_post', 'url'=>'board/post'],
+            ['topmenu_code'=>'calendar', 'url'=>'calendar'],
             ['topmenu_code'=>'settings', 'url'=>'settings'],
         ]);
     }

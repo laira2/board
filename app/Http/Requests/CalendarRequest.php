@@ -27,6 +27,8 @@ class CalendarRequest extends FormRequest
             'board_id'  => 'required|exists:boards,id',
             'startDate'    => 'required|date',
             'endDate'  => 'required|date|after_or_equal:start_date',
+            'startTime' => 'required',
+            'endTime' => 'required',
             'type'  => 'required|string|max:50',
         ];
     }

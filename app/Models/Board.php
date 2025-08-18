@@ -39,5 +39,5 @@ class Board extends Model
     
     protected $table = 'boards';
 
-    protected $fillable = ['title','content','author'];
+    protected $fillable = ['title','content','author','calendar_id'];
 }

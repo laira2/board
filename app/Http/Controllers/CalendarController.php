@@ -44,4 +44,18 @@ class CalendarController extends Controller
     {
         return $this -> calendarService -> getEventList();
     }
+
+    public function destroy($id)
+    {
+        $this -> calendarService ->deleteEvent($id);
+        
+        return Inertia::location('/calendar');
+    }
+
+    public function update($id, CalendarRequest $calendarRequest)
+    {
+        $this -> calendarService -> updateEvent($id, $calendarRequest);
+
+        return Inertia::location('/calendar');
+    }
 }

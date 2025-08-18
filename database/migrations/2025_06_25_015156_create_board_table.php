@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title')->nullable(false);
             $table->string('author')->nullable(false);
             $table->text('content')->nullable(false);
-
+            $table->unsignedBigInteger('calendar_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

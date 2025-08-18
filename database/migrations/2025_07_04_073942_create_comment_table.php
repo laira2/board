@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('post_id')->nullable(false)
                                         ->constrained(
                                             table:'boards', indexName:'id'
-                                        );  
+                                        )->cascadeOnDelete();  
 
             $table->softDeletes();
             $table->timestamps();
