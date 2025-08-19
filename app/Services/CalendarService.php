@@ -86,7 +86,7 @@ class CalendarService
 
             $event->fill($calendarRequest->except(['startDateText','startTime','endDateText','endTime']));
 
-$event->save();
+            $event->save();
 
 
             return $event;

@@ -224,7 +224,7 @@ const saveEvent = (info) => {
   form.startTime = form.startTime?.toTimeString().substring(0, 5) || '';
   form.endTime = form.endTime?.toTimeString().substring(0, 5) || '';
 
-  if(isEditing){
+  if(isEditing.value){
     form.put(`/calendar/event/${form.id}`, {
     onSuccess: () => {
       form.reset();
