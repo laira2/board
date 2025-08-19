@@ -17,7 +17,7 @@ class TopMenuService
         
         Log::debug("pagination 적용 perPage 전체 조회".$perPage);
 
-        $topmenus = Topmenu::leftJoin('urls', 'topmenus.code', '=', 'url.topmenu_code')
+        $topmenus = Topmenu::leftJoin('urls', 'topmenus.code', '=', 'urls.topmenu_code')
                 ->select('topmenus.*', 'urls.url')
                 ->paginate($perPage);
                 

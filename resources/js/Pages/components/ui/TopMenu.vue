@@ -5,7 +5,7 @@
                 <Link
                     v-for="menu in menus"
                     :key="menu.url"
-                    :href="`/menu/${menu.url}`"
+                    :href="`/${menu.url}`"
                     class="text-sm text-gray-950 hover:underline px-3 py-2 rounded hover:bg-gray-100"
                 >
                     {{ menu.name }}

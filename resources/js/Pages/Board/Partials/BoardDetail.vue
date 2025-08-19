@@ -27,14 +27,22 @@
                         <p class="m-0">{{ board.content }}</p>  
                     </div>
                 </template>
-                <template #footer>
+                <template #footer>                    
                     <div class="flex justify-end gap-4 mt-1">
-                        <div class="card flex justify-center flex-wrap gap-4">
-                            <Button type="button" label="댓글" variant="text" :badge="comments?.length || 0" @click="toggleComments" />
+                        <div v-show="showCalendar()">
+                            <Link :href="`/calendar`" >
+                                <Button label="일정 확인" severity="info" variant="outlined" />
+                            </Link>
                         </div>
-                        <Link :href="`/`" >
-                            <Button label="목록" severity="secondary" outlined class="w-15 ml-1" /> 
-                        </Link> 
+                        <div class="card flex ">
+                            <div class="justify-center flex-wrap gap-4">
+                                <Button type="button" label="댓글" variant="text" :badge="comments?.length || 0" @click="toggleComments" />
+                            </div>
+                            <Link :href="`/`" >
+                                <Button label="목록" severity="secondary" outlined class="w-15 ml-1" /> 
+                            </Link> 
+                        </div>
+                        
                     </div>
                 </template>
             </Card>
@@ -59,7 +67,10 @@ const props = defineProps({
         type: Array
     },
 }); 
-
+console.log(props.board);
+const showCalendar = () => {
+  return !!props.board.calendar_id; 
+};
 const showComments = ref(false)
 
 const toggleComments = () => {
