@@ -114,6 +114,7 @@ class BoardController extends Controller
         Log::debug('result'.$result);
         return Inertia::render('Board/Index',[
             'boards' => $result,
+            
         ]);
     }
 }
