@@ -18,7 +18,7 @@ class BoardService
     {
         //
     }
-    
+
     /**
      * 전체 게시글 조회 (페이지네이션 적용)
      */
@@ -26,7 +26,7 @@ class BoardService
     {
         $perPage = $request->input('per_page', 10);
         $boards = Board::orderBy('created_at', 'desc')->paginate($perPage);
-        
+
         return $boards;
     }
 
@@ -44,14 +44,10 @@ class BoardService
      */
     public function getBoard($id)
     {
-        try
-        {
-            $board = Board::whereId($id)
-                            -> first();
-            return $board;
-        }catch(Exception $e)
-        {
-            $e ->getMessage();
+        try {
+            return Board::findOrFail($id);
+        } catch (Exception $e) {
+            $e->getMessage();
         }
     }
 
@@ -60,17 +56,15 @@ class BoardService
      */
     public function createPost(Request $request)
     {
-        try
-        {
+        try {
             $newboard = Board::create([
-                    'title' => $request['title'],
-                    'author' => $request['author'],
-                    'content' => $request['content'],
-                ]);
+                'title' => $request['title'],
+                'author' => $request['author'],
+                'content' => $request['content'],
+            ]);
             return $newboard;
-        }catch(Exception $e)
-        {
-            $e ->getMessage();
+        } catch (Exception $e) {
+            $e->getMessage();
         }
     }
 
@@ -79,7 +73,7 @@ class BoardService
      */
     public function updateBoard($id, BoardRequest $request)
     {
-        $board = $this -> getBoard($id);
+        $board = $this->getBoard($id);
         $board->update($request->validated());
 
         $updated_board = new BoardResource($board);
@@ -93,20 +87,21 @@ class BoardService
     public function deleteBoard($id)
     {
         $board = Board::find($id);
-        $board ->delete();
+        $board->delete();
     }
 
     /**
      * 게시글 검색
      */
-    public function searchBaord($search_key){
+    public function searchBaord($search_key)
+    {
 
         $board = Board::query()
-                        ->where('title','like',"%$search_key%")
-                        -> orWhere('author','like',"%$search_key%")
-                        ->orderBy('id', 'desc')
-                        ->paginate(10);     
-        Log::debug('board'.$board);
+            ->where('title', 'like', "%$search_key%")
+            ->orWhere('author', 'like', "%$search_key%")
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        Log::debug('board' . $board);
         return $board;
     }
 }

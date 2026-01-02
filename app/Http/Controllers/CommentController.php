@@ -31,6 +31,7 @@ class CommentController extends Controller
             $new_comment = $this -> commentService -> createComment($request);
             return Inertia::location("/board/{$new_comment->post_id}");
         }catch(Exception $e){
+            dd($e->getMessage());
             return response()->json(['error' => '댓글 저장 실패'], 500);
         }
     }

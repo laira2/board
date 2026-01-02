@@ -46,13 +46,14 @@ class CalendarService
         Log::debug("getEventList");
         return Calendar::all()->map(function ($event) {
 
-            $endDate = Carbon::parse($event->end_date)->addDay()->format('Y-m-d H:i');
+            // $endDate = Carbon::parse($event->end_date)->addDay()->format('Y-m-d H:i');
 
             return [
                 'id' => $event->id,
                 'title' => $event->title,
                 'start' => $event->start_date,
-                'end' => $endDate,
+                'end' => $event->end_date,
+                // 'end' => $endDate,
                 'type' => $event->type,
                 'author' => $event->regist_user_id,
                 'board_id' => $event->board_id,

@@ -40,4 +40,9 @@ class Board extends Model
     protected $table = 'boards';
 
     protected $fillable = ['title','content','author','calendar_id'];
+
+    public function board()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

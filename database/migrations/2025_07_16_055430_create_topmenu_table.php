@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // Factory 사용하도록 권장
         DB::table('topmenus')->insert([
             ['code'=>'home','name'=>'home','description'=>'메인화면. 게시글 조회','is_activate'=>true],
             ['code'=>'board_post', 'name'=>'post','description'=>'게시글 작성','is_activate'=>true],

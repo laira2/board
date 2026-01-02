@@ -20,6 +20,8 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        // Factory 사용하도록 권장
         DB::table('urls')->insert([
             ['topmenu_code'=>'home', 'url'=>'home'],
             ['topmenu_code'=>'board_post', 'url'=>'board/post'],

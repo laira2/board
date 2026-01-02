@@ -13,7 +13,7 @@ class CommentService
     public function getComments($boardId)
     {
         $comments = Comment::with('allChildren')
-                    ->where('post_id', $boardId)
+                    ->wherePostId($boardId)
                     ->whereNull('parent_id')          
                     ->orderBy('created_at')
                     ->get();
@@ -26,13 +26,15 @@ class CommentService
 
     public function createComment(Request $request)
     {
-        $new_comment = Comment::create([
-                'author'=>$request['author'],
-                'comment' => $request['comment'],
-                'post_id' => $request['post_id'],
-                'parent_id'=> $request['parent_id']??null,
-                'depth' => $request['depth']??0
-            ]);
+        $validated = $request->validate([
+            'author' => 'required|string',
+            'comment' => 'required|string',
+            'post_id' => 'required|int',
+            'parent_id' => 'nullable|int',
+            'depth' => 'nullable|int',
+        ]);
+
+        $new_comment = Comment::create($validated);
 
         return  $new_comment;
     }
